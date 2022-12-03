@@ -1,0 +1,1028 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.2">Jekyll</generator><link href="https://www.mocklab.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://www.mocklab.io/" rel="alternate" type="text/html" /><updated>2022-12-03T16:39:34+00:00</updated><id>https://www.mocklab.io/feed.xml</id><title type="html">MockLab</title><subtitle>MockLab is the hosted API mocking tool built on WireMock</subtitle><author><name>Your Name</name></author><entry><title type="html">Postman Mock Server vs. MockLab</title><link href="https://www.mocklab.io/blog/postman-mock-server-vs-mocklab/" rel="alternate" type="text/html" title="Postman Mock Server vs. MockLab" /><published>2021-03-24T00:00:00+00:00</published><updated>2021-03-24T00:00:00+00:00</updated><id>https://www.mocklab.io/blog/postman-mock-server-vs-mocklab</id><content type="html" xml:base="https://www.mocklab.io/blog/postman-mock-server-vs-mocklab/"><![CDATA[<p>Postman is indisputably the dominant HTTP testing tool on the market today, and
+if you’re involved in developing or testing APIs it’s highly likely you’ve used it
+(or know someone who does at least).</p>
+
+<p>A feature of Postman is “mock servers”, which allows mock APIs to be generated from
+from Collections (Postman’s main data model - sets of request and response examples). This
+article compares Postman’s capabilities and approach to API mocking with MockLab’s,
+examining the relative strengths and best use of each.</p>
+
+<h2 id="terminology">Terminology</h2>
+
+<p>The concepts underlying Postman’s and MockLab’s mocking capabilities are very similar,
+but some naming and terminology differs. The following table describes both
+products’ terms for each major concept:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>MockLab</th>
+      <th>Postman</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Mock API</td>
+      <td>Mock Server</td>
+      <td>A container for stubs/examples. Accessed via a unique domain name.</td>
+    </tr>
+    <tr>
+      <td>Stub</td>
+      <td>Example</td>
+      <td>Specification of a request to be matched, paired with the response to be returned.</td>
+    </tr>
+    <tr>
+      <td>Response Templating</td>
+      <td>Dynamic Responses</td>
+      <td>Responses that contain random values, variables or request data.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="getting-up-and-running">Getting up and running</h2>
+
+<p>With both products you need to sign-up/log into a user account in order to create a mock API/server.</p>
+
+<p>In Postman you create a mock server either via the context menu for a collection, or from the Mock Servers tab:</p>
+
+<p><img src="/images/postman-vs-mocklab/postman-new-mock-server.png" style="border: none" alt="Postman new mock server" /></p>
+
+<p>In MockLab you can create a new mock API via the “+ Mock API” button on the top bar:</p>
+
+<p><img src="/images/postman-vs-mocklab/mocklab-new-mock-api.png" style="border: none" alt="MockLab new mock API" /></p>
+
+<h3 id="base-urls-and-domain-names">Base URLs and domain names</h3>
+
+<p>To use a mock server/API in either product, a unique base URL is needed.</p>
+
+<p>Postman will generate a unique domain name for a mock server using a UUID for the
+hostname e.g.</p>
+
+<p><code class="language-plaintext highlighter-rouge">https://aab7bb9b-4a59-4169-bd3a-697274f033f7.mock.pstmn.io</code></p>
+
+<p>MockLab will also generate a unique domain name, using a short hash for the hostname e.g.</p>
+
+<p><code class="language-plaintext highlighter-rouge">https://nd7dd.mocklab.io</code></p>
+
+<p>MockLab also permits you to optionally choose a hostname of your own, so you can
+create a mock API with a base URL like</p>
+
+<p><code class="language-plaintext highlighter-rouge">https://acme-payments-api.mocklab.io</code></p>
+
+<h2 id="creating-stubs-and-examples">Creating stubs and examples</h2>
+
+<p>In Postman, examples in a collection are used directly to configure responses in
+the mock server. Adding a new example to a request in a collection will automatically
+add it to the mock server:</p>
+
+<p><img src="/images/postman-vs-mocklab/postman-new-example.png" style="border: none" alt="Postman new example" /></p>
+
+<p>In MockLab, stubs are added directly from within a mock API’s Stubs page:</p>
+
+<p><img src="/images/postman-vs-mocklab/mocklab-new-stub.png" style="border: none" alt="MockLab new stub" /></p>
+
+<h2 id="matching-requests">Matching requests</h2>
+
+<p>An essential component of mocking is request matching. The mocking tool must
+select the correct response for the incoming request based on a set of criteria.</p>
+
+<p>This is often as simple as checking that the HTTP method and URL are exactly equal but
+it’s not uncommon to need to match headers, cookies or request body elements.
+Sometimes it’s also necessary to match more loosely e.g. when we want to return
+a response regardless of the user ID passed in the URL path.</p>
+
+<h3 id="url-and-query">URL and query</h3>
+
+<p>Postman supports a degree of request matching flexibility above simple method + URL
+equality.</p>
+
+<p>In your URL path you can specify a parameter name and this will be treated as a wildard, so any value will be accepted:</p>
+
+<p><img src="/images/postman-vs-mocklab/postman-path-parameter.png" alt="Postman path parameter" /></p>
+
+<p>MockLab also supports loose matching of URL paths, but via the use of regular expressions
+rather than named parameters:</p>
+
+<p><img src="/images/postman-vs-mocklab/mocklab-loose-url-matching.png" style="width: 80%" alt="MockLab loose URL matching" /></p>
+
+<p>This gives some additional control over named parameters - you can use very loose
+regex expressions that will match anything, or choose to constrain the range of valid
+values to e.g. just numbers.</p>
+
+<h3 id="query-parameters-headers-and-cookies">Query parameters, headers and cookies</h3>
+
+<p>Postman doesn’t use query parameters, headers or cookies in its matching process,
+so a request sent with any combination of these values will always be matched provided
+the method and URL are correct.</p>
+
+<p>MockLab supports matching of all of these attributes. It also provides a variety
+of predicates, so that it’s possible to match loosely or precisely, depending on your needs.</p>
+
+<p>For instance, you could match a request with a query parameter of <code class="language-plaintext highlighter-rouge">search</code>
+exactly equalling <code class="language-plaintext highlighter-rouge">pyjamas</code>, an <code class="language-plaintext highlighter-rouge">Accept</code> header containing <code class="language-plaintext highlighter-rouge">json</code> and a cookie named
+<code class="language-plaintext highlighter-rouge">session</code> that consists of lowercase alphanumerics only:</p>
+
+<p><img src="/images/postman-vs-mocklab/mocklab-request-attribute-matching.png" style="width: 80%" alt="MockLab query, header and cookie matching" /></p>
+
+<h3 id="request-body">Request body</h3>
+
+<p>Matching the request body is also a requirement in many situations. For instance,
+if you want to test a successful outcome when one variant of a request payload is
+POSTed to the API and an error when a different variant is sent, you need to be able
+to distinguish between request body contents.</p>
+
+<p>By default, Postman will ignore the request body when matching a request. However,
+you can make it include the request body, evaluating an exact match by including the
+following header in the HTTP request:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>x-mock-match-request-body: true
+</code></pre></div></div>
+
+<p>This is quite limiting for a couple of reasons:</p>
+
+<ol>
+  <li>It requires you to modify your application under test in order to make it send the header.</li>
+  <li>Exact matching on request bodies can fail when whitespace varies, or when volatile data such as transaction IDs are present.</li>
+</ol>
+
+<p>MockLab can match the request body without the need to modify requests sent by
+the app under test. It offers a set of predicates that support flexible
+matching of input in JSON, XML or plain text.</p>
+
+<p>For example, you could match a request with a JSON body of the correct general structure
+and one field exactly specified using the <code class="language-plaintext highlighter-rouge">equalToJson</code> predicate:</p>
+
+<p><img src="/images/postman-vs-mocklab/mocklab-body-matching.png" style="width: 80%" alt="MockLab body matching" /></p>
+
+<h2 id="debugging">Debugging</h2>
+
+<p>When testing a system with your mock APIs, sooner or later you’re going to want to see
+the details of requests that were made. Both products have a request log feature
+for this purpose, with each presenting very similar information.</p>
+
+<p>Postman:</p>
+
+<p><img src="/images/postman-vs-mocklab/postman-request-log.png" style="border: none" alt="Postman request log" /></p>
+
+<p>MockLab:</p>
+
+<p><img src="/images/postman-vs-mocklab/mocklab-request-log.png" style="border: none" alt="MockLab request log" /></p>
+
+<h3 id="unmatched-requests">Unmatched requests</h3>
+
+<p>A common issue when working with mock APIs is when a request made by your app under test isn’t matched.</p>
+
+<p>When Postman can’t match a response to your request it issues a standard response:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{"error":{"name":"mockRequestNotFoundError","message":"To mock this request add an example response for the mock server to return.","header":"You need an example"}}
+</code></pre></div></div>
+
+<p>When MockLab can’t match a request it will return a diff between the most similar stub
+it could find and the request:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ curl https://example.mocklab.io/v1/users -X PUT -d '{ "wrong": "stuff" }'
+
+                                               Request was not matched
+                                               =======================
+
+-----------------------------------------------------------------------------------------------------------------------
+| Closest stub                                             | Request                                                  |
+-----------------------------------------------------------------------------------------------------------------------
+                                                           |
+JSON request body matching                                 |
+                                                           |
+POST                                                       | PUT                                                 &lt;&lt;&lt;&lt;&lt; HTTP method does not match
+[path] /v1/users                                           | /v1/users
+                                                           |
+{                                                          | {                                                   &lt;&lt;&lt;&lt;&lt; Body does not match
+  "id" : 1234,                                             |   "wrong" : "stuff"
+  "name" : "${json-unit.any-string}",                      | }
+  "isAdminUser" : "${json-unit.any-boolean}"               |
+}                                                          |
+                                                           |
+-----------------------------------------------------------------------------------------------------------------------
+</code></pre></div></div>
+
+<h2 id="importing-from-other-formats">Importing from other formats</h2>
+
+<p>There are a number of widely used formats for describing HTTP interfaces and events.
+If you’re already working with one of these, being able to generate a mock API
+automatically from it can be a big time-saver.</p>
+
+<p>Postman can import from <a href="https://swagger.io/specification/" target="_blank">OpenAPI</a>,
+<a href="https://raml.org/" target="_blank">RAML</a>,
+<a href="https://graphql.org/" target="_blank">GraphQL</a>,
+<a href="https://curl.se/" target="_blank">curl</a> and
+<a href="https://en.wikipedia.org/wiki/Web_Application_Description_Language" target="_blank">WADL</a>:</p>
+
+<p><img src="/images/postman-vs-mocklab/postman-import.png" style="border: none" alt="Postman import" /></p>
+
+<p>MockLab supports <a href="https://swagger.io/specification/" target="_blank">OpenAPI</a>,
+<a href="https://swagger.io/specification/" target="_blank">Swagger</a>,
+Postman collections and
+<a href="http://wiremock.org" target="_blank">WireMock</a> JSON:</p>
+
+<p><img src="/images/postman-vs-mocklab/mocklab-import.png" style="border: none" alt="MockLab import" /></p>
+
+<h3 id="customising-the-import">Customising the import</h3>
+
+<p>When importing from a specification format like OpenAPI (one that represents a contract
+rather than just a list of request/response pairs) it’s useful to be able to exert
+some control over how your examples or stubs are generated.</p>
+
+<p>Postman presents a number of options prior to executing the import that permit you
+to choose things like whether response examples or schemas will be used to generate
+the request and response parameters in your Postman examples:</p>
+
+<p><img src="/images/postman-vs-mocklab/postman-openapi-import-options.png" style="border: none" alt="Postman OpenAPI import options" /></p>
+
+<p>MockLab takes a slightly different approach. Rather than offering a set of options
+up-front, it understands a set of <a href="https://swagger.io/docs/specification/openapi-extensions/" target="_blank">extended attributes</a>
+that you can add to your OpenAPI spec. These allow you to set specific request
+parameters in the generated stubs, rather than getting the randomly generated defaults.
+In this way you can also control how randomly-generated values are produced when response bodies
+are generated from schemas.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">schema</span><span class="pi">:</span>
+  <span class="na">type</span><span class="pi">:</span> <span class="s">string</span>
+  <span class="na">x-faker</span><span class="pi">:</span> <span class="s">name.first_name</span>
+</code></pre></div></div>
+
+<p>See the <a href="https://www.mocklab.io/docs/swagger/#customising-the-import" target="_blank">Swagger documentation</a>
+for details on using extended attributes.</p>
+
+<h2 id="dynamic-responses">Dynamic responses</h2>
+
+<p>A basic stub or example will return a fixed response each time it is matched.
+However, in some cases it’s necessary to generate the response dynamically.</p>
+
+<p>Reasons for this include:</p>
+
+<ul>
+  <li>Copying data into the response from the request e.g a URL path parameter or element from the request body.</li>
+  <li>Including random data such as names, dates, job titles, addresses etc.</li>
+  <li>Generating values that must be calculated per request e.g. when a cryptographic signature must be included.</li>
+</ul>
+
+<p>Postman supports a rich set of random value generators based on <a href="https://www.npmjs.com/package/faker" target="_blank">Faker</a>.</p>
+
+<p>You can include tokens like  <code class="language-plaintext highlighter-rouge">{{$randomFirstName}}</code>  in an example’s
+response body and they will be substitued with a random value of the type specified
+when the response is served. You can find the <a href="https://learning.postman.com/docs/writing-scripts/script-references/variables-list/" target="_blank">full list of available tokens here</a>.</p>
+
+<p>Postman also supports using wildcards as variables in response bodies, so for instance
+if your example’s URL is  <code class="language-plaintext highlighter-rouge">/v1/users/{{user_id}}</code>  then you
+can return the value of <code class="language-plaintext highlighter-rouge">user_id</code> in your response body by including  <code class="language-plaintext highlighter-rouge">/v1/users/{{user_id}}</code> .</p>
+
+<p><img src="/images/postman-vs-mocklab/postman-dynamic-variable.png" style="border: none" alt="Postman dynamic variable" /></p>
+
+<p>MockLab supports full <a href="https://handlebarsjs.com/" target="_blank">Handlebars</a>
+template syntax in its response bodies and headers. This enables <a href="/docs/response-templating/conditional-logic-and-iteration/" target="_blank">conditional logic and looping</a>, variables, and access to a library of functions via Handlebars helpers.</p>
+
+<p>The model provided to the template
+includes all <a href="/docs/response-templating/basics/#the-data-model" target="_blank">attributes of the incoming request</a>, so it’s possible to include
+URL path elements, query parameters, header and the request body in your responses.</p>
+
+<p>Additionally, there are a number of Handlebars helpers to extract and transform
+<a href="/docs/response-templating/string-helpers/" target="_blank">text</a>/<a href="/docs/response-templating/json/" target="_blank">JSON</a>/<a href="/docs/response-templating/xml/" target="_blank">XML</a>,
+manipulate <a href="/docs/response-templating/dates-and-times/" target="_blank">dates/times</a>, generate <a href="/docs/response-templating/random-values/" target="_blank">random strings</a>
+(the full Faker set isn’t supported yet) and generate properly constructed, signed <a href="/docs/response-templating/jwt/" target="_blank">JSON Web Tokens (JWTs)</a>.</p>
+
+<p><img src="/images/postman-vs-mocklab/mocklab-response-templating.png" style="width: 80%;padding: 15px" alt="MockLab response templating" /></p>
+
+<h2 id="response-delays">Response delays</h2>
+
+<p>Mock servers often return responses faster than their real API counterparts.
+This is great when you just want your functional test suite to run as fast as possible,
+but if you’re testing your app’s UX with realistic timings, or want to check that
+a timeout is configured correctly then you need to be able to add artificial delay
+to your responses.</p>
+
+<p>Postman permits you to specify a fixed delay at the mock server level.</p>
+
+<p><img src="/images/postman-vs-mocklab/postman-response-delay.png" alt="Postman response delay" /></p>
+
+<p>MockLab supports <a href="/docs/delays/" target="_blank">fixed, random and chunked delays</a> at the individual stub level.</p>
+
+<p><img src="/images/postman-vs-mocklab/mocklab-response-delay.png" style="width: 80%" alt="MockLab response delay" /></p>
+
+<h2 id="automation">Automation</h2>
+
+<p>In modern development and testing workflows it’s common to want to automate the setup of
+your environment and to be able to operate your tools programmatically. Both products provide APIs for these purposes.</p>
+
+<p><a href="https://www.postman.com/postman/workspace/postman-public-workspace/folder/12959542-6c733d02-0bec-4bcb-bb36-59db8d941198?ctx=documentation" target="_blank">Postman’s API</a>
+supports create/update/delete of mock servers and collections,
+allowing you to automatically configure the mock servers available to your environment
+and the specific examples served by them.</p>
+
+<p><img src="/images/postman-vs-mocklab/postman-api.png" style="border:none;width:30%" alt="Postman API" /></p>
+
+<p><a href="/docs/provisioning/" target="_blank">MockLab’s Provisioning API</a>
+allows mock APIs to be created and deleted.</p>
+
+<p>Once created a mock API has its own <a href="/docs/mocking/" target="_blank">Mocking API</a>
+which supports create/update/delete of stubs, querying of the request log and control
+of other features such as recording.</p>
+
+<p><img src="/images/postman-vs-mocklab/mocklab-api.png" style="border:none" alt="MockLab API" /></p>
+
+<h2 id="other-features">Other features</h2>
+
+<p>MockLab provides a few extra capabilities that are not yet supported by Postman.</p>
+
+<p><a href="/docs/recording-stubs/" target="_blank">Recording</a> - the ability to intercept HTTP traffic between your app (or a client tool)
+and an API, converting it into a set of stubs.</p>
+
+<p><a href="/docs/proxying/" target="_blank">Proxying</a> - conditionally forwarding requests to another API. This is useful
+when you want to test against a real API, but mock the parts of it that haven’t yet been implemented.
+It’s also a good way to reliably return otherwise hard-to-reproduce errors.</p>
+
+<p><a href="/docs/simulating-faults/" target="_blank">Faults</a> - a MockLab stub can respond with a number of network faults including dropped
+connections and garbage HTTP content.</p>
+
+<p><strong>Performance testing</strong> - Mock servers in Postman are rate limited, meaning they’re not
+practical for use in a load test. MockLab’s Performance plans provide dedicated host
+capacity, no rate limiting and a performance metrics dashboard.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>Postman mock servers are a great solution if you already have Postman in your
+workflow, your request matching requirements are simple and you want a
+straightforward solution that’s tightly integrated with your existing setup.</p>
+
+<p>MockLab may be the best choice if you need fine control over how requests are matched,
+advanced response templating, recording, proxying, a comprehensive API or support for performance testing.</p>
+
+<p>And remember, you can <a href="https://www.mocklab.io/docs/import-export/postman/" target="_blank">import your Postman collections</a> into MockLab to get started.</p>
+
+<div class="mid-article-cta">
+  <p class="mid-article-cta__text">
+    If you've made it this far, why not give MockLab a try?
+  </p>
+
+  <p class="mid-article-cta__text">
+    It's quick, simple and free to get started, and it has the flexibility to grow with your project's testing demands.
+  </p>
+
+  <a class="mid-article-cta__learn-more" href="https://get.mocklab.io/?utm_source=www.mocklab.io&amp;utm_medium=blog&amp;utm_campaign=postman-vs-mocklab-learn-more-cta" title="Learn more">Learn more</a>
+
+  <a class="mid-article-cta__get-started" href="https://app.mocklab.io/login?for=signup&amp;utm_source=www.mocklab.io&amp;utm_medium=blog&amp;utm_campaign=postman-vs-mocklab-get-started-cta" title="Get started for free" target="_blank">Get started for free</a>
+</div>]]></content><author><name>Tom Akehurst</name></author><category term="Postman" /><category term="MockLab" /><category term="API Mocking" /><summary type="html"><![CDATA[A comparison of Postman mock servers and MockLab for building mock APIs.]]></summary></entry><entry><title type="html">Which Java HTTP client should I use in 2020?</title><link href="https://www.mocklab.io/blog/which-java-http-client-should-i-use-in-2020/" rel="alternate" type="text/html" title="Which Java HTTP client should I use in 2020?" /><published>2020-10-12T00:00:00+01:00</published><updated>2020-10-12T00:00:00+01:00</updated><id>https://www.mocklab.io/blog/which-java-http-client-should-i-use-in-2020</id><content type="html" xml:base="https://www.mocklab.io/blog/which-java-http-client-should-i-use-in-2020/"><![CDATA[<p>HTTP has become the dominant protocol for integration of networked programs, and consequently many (possibly most) Java projects need to be able to make HTTP calls to other systems.</p>
+
+<p>As with many things in the Java ecosystem, a broad array of alternatives exist for achieving this, both via core libraries and open source.</p>
+
+<p>This can make choosing the right HTTP client less than straightforward. This article aims to provide an overview of the major libraries, with a focus on the characteristics you’re likely to care about when making a selection for your project.</p>
+
+<p>We’re only going to discuss clients that actually implement the HTTP protocol, so libraries such as Spring’s RestTemplate or Feign that act as higher-level wrappers will not be discussed (although we may look at these in a future article).</p>
+
+<h2 id="criteria">Criteria</h2>
+
+<p>So what should we consider when choosing an HTTP client?</p>
+
+<p>Obviously, each project’s requirements are somewhat unique, but there are several common factors that most teams would wish to consider:</p>
+<ul>
+  <li>Features</li>
+  <li>API style</li>
+  <li>Quality and maturity</li>
+  <li>Maintenance and community</li>
+  <li>Operability, reliability and observability</li>
+  <li>Security</li>
+  <li>Performance</li>
+</ul>
+
+<p>The last three of these are deep topics in their own right, and we’ll write more about these in future articles.</p>
+
+<p>While some factors are somewhat qualitative e.g. documentation, the following features can easily be described in yes/no form and are summarised for each client in the table below.</p>
+
+<p><strong>Synchronous vs. asynchronous API</strong><br />
+Whether the client supports a synchronous (blocking) call style, asynchronous (non-blocking) or both.</p>
+
+<p>We also indicate what style (or styles) of async API is presented, if any. In practice, this is one or more of futures, callbacks or reactive streams.</p>
+
+<p>It’s worth pointing out that although most clients with an asynchronous API only support one
+style (futures or callbacks typically), there are a number of wrapper libraries
+such as Square’s <a href="https://square.github.io/retrofit/" target="_blank">Retrofit</a> or Spring’s <a href="https://www.baeldung.com/spring-5-webclient" target="_blank"><em>WebClient</em></a> that adapt these to other styles such as reactive streams.</p>
+
+<p><strong>HTTP/2</strong><br />
+Support for version 2 of the HTTP protocol.</p>
+
+<p><strong>Forms</strong><br />
+Support for posting of form data to the server.</p>
+
+<p>Note: all clients can do this if you’re willing to build up the request from scratch yourself, so what we’re really talking about here is whether a specific API is provided.</p>
+
+<p><strong>Multipart request and file upload</strong><br />
+Support for sending multipart requests to the server.</p>
+
+<p>As with forms, we’re interested in whether the client provides an API specifically for this.</p>
+
+<p><strong>Cookies</strong><br />
+Receives, stores, sends and allows manipulation of cookies.</p>
+
+<p><strong>Authentication</strong><br />
+Support for HTTP authentication protocols. The most common of these are:</p>
+
+<ul>
+  <li><a href="https://en.wikipedia.org/wiki/Basic_access_authentication" target="_blank">HTTP Basic</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Digest_access_authentication" target="_blank">Digest</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/NT_LAN_Manager" target="_blank">NTLM</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/SPNEGO" target="_blank">SPNEGO</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Kerberos_(protocol)" target="_blank">Kerberos</a></li>
+</ul>
+
+<p>While all of the clients discussed can in principle support any authentication scheme by allowing setting of request headers and request parameters, only some offer explicit extension points into which authentication implementations can be plugged, and fewer still offer common schemes out of the box.</p>
+
+<p><strong>Transparent content compression/decompression</strong><br />
+Whether the client can perform <a href="https://en.wikipedia.org/wiki/HTTP_compression" target="_blank">compression and decompression</a>
+of content via (most commonly) <a href="" target="_blank">Deflate</a>,
+<a href="https://en.wikipedia.org/wiki/Gzip" target="_blank">GZip</a> or
+<a href="https://en.wikipedia.org/wiki/Brotli" target="_blank">Brotli</a>
+without requiring the caller to explicitly perform the encode and decode steps.</p>
+
+<p>At present GZip is by far the most common algorithm.</p>
+
+<p><strong>Caching</strong><br />
+Support for caching of HTTP responses according to the caching elements of the HTTP standard.</p>
+
+<p><strong>Websockets</strong><br />
+Support for the <a href="https://en.wikipedia.org/wiki/WebSocket" target="_blank">Websockets</a> extension to the HTTP spec.</p>
+
+<h2 id="configuration-options">Configuration options</h2>
+<p>The potential range of configuration options for an HTTP client is large, and some of the clients discussed here offer very fine-grained control over both high and low-level aspects of their behaviour.</p>
+
+<p>However, there are a few settings that are likely to be of interest to most teams (at some stage):</p>
+<ul>
+  <li>Connect timeout</li>
+  <li>Socket read timeout</li>
+  <li>Redirect policy</li>
+  <li>Pooled connection limit - overall and per destination/route</li>
+  <li>Idle connection timeout</li>
+  <li>Proxy server address and authentication settings</li>
+</ul>
+
+<p>A further characteristic to be aware of is that some clients (specifically the core Java ones) only expose certain parameters as system properties. This means that a) they can only be set globally per running JVM, and b) they are much harder to integrate with other configuration systems.</p>
+
+<p>In general, being able to set configuration parameters programmatically, at the client instance level is preferable as this permits multiple clients to exist differing options and simpler integration into frameworks and apps with their own config arrangements. It also makes life much easier if you’re deploying into an environment such as a servlet container where you may not have full control over startup parameters.</p>
+
+<div class="mid-article-cta">
+  <p class="mid-article-cta__text">
+    If you've made it this far there's a good chance you're building a system that
+    relies on 3rd party APIs. MockLab can help you test your system when those
+    APIs don't exist yet, have flakey test environments or are expensive to call.
+  </p>
+
+  <p class="mid-article-cta__text">
+    It's quick and simple to get started with and it's powered by WireMock so it
+    has the flexibility to grow with your project's testing demands.
+  </p>
+
+  <a class="mid-article-cta__learn-more" href="https://get.mocklab.io/?utm_source=www.mocklab.io&amp;utm_medium=blog&amp;utm_campaign=java-http-clients-learn-more-cta" title="Learn more" target="_blank">Learn more</a>
+
+  <a class="mid-article-cta__get-started" href="https://app.mocklab.io/login?for=signup&amp;utm_source=www.mocklab.io&amp;utm_medium=blog&amp;utm_campaign=java-http-clients-get-started-cta" title="Get started for free" target="_blank">Get started for free</a>
+</div>
+
+<h2 id="the-clients">The clients</h2>
+<p>The HTTP clients we will examine are:</p>
+
+<ul>
+  <li>Java’s <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/net/HttpURLConnection.html" target="_blank">HttpURLConnection</a> and <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/javax/net/ssl/HttpsURLConnection.html" target="_blank">HttpsURLConnection</a></li>
+  <li>The new <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.net.http/java/net/http/HttpClient.html" target="_blank">HttpClient</a>, introduced in Java 11</li>
+  <li><a href="https://hc.apache.org/httpcomponents-client-5.0.x/index.html" target="_blank">Apache HTTPClient</a></li>
+  <li><a href="https://square.github.io/okhttp/" target="_blank">OkHttpClient</a></li>
+  <li><a href="https://github.com/AsyncHttpClient/async-http-client" target="_blank">AsyncHttpClient</a></li>
+  <li><a href="https://www.eclipse.org/jetty/documentation/current/http-client.html" target="_blank">Jetty HttpClient</a></li>
+</ul>
+
+<p>Below is a summary of the salient information and features for each client:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th> </th>
+      <th>Java version compatibility (current version of client)</th>
+      <th>Original release date</th>
+      <th>Latest release (as of September 2020)</th>
+      <th>Sync/Async</th>
+      <th>Async API style(s)</th>
+      <th>HTTP/2</th>
+      <th>Forms</th>
+      <th>Multipart / file upload</th>
+      <th>Cookies</th>
+      <th>Authentication</th>
+      <th>Transparent content compression</th>
+      <th>Caching</th>
+      <th>Websockets</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><img src="/images/http-clients/old-java-logo.png" style="border: none; height: 50px" alt="Old Java logo" /><br /> HttpURLConnection</td>
+      <td>1.1+ (HTTP)<br />1.4+ (HTTPS)</td>
+      <td>1997 (with JDK 1.1)<br />2002 (with JDK 1.4)</td>
+      <td>September 2020 (with Java SE 15)</td>
+      <td>Sync only</td>
+      <td>N/A</td>
+      <td>No</td>
+      <td>No</td>
+      <td>No</td>
+      <td>No</td>
+      <td>None</td>
+      <td>No</td>
+      <td>No</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td><img src="/images/http-clients/new-java-logo.png" style="border: none; height: 50px" alt="New Java logo" /><br /> Java HttpClient</td>
+      <td>9+ (as incubator module) 11+ (GA)</td>
+      <td>September 2018 (with Java SE 11)</td>
+      <td>September 2020 (with Java SE 15)</td>
+      <td>Both</td>
+      <td>Futures</td>
+      <td>Yes</td>
+      <td>No</td>
+      <td>No</td>
+      <td>Yes</td>
+      <td>Basic (not pre-emptive) Pluggable</td>
+      <td>No</td>
+      <td>No</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td><img src="/images/http-clients/httpcomponents-logo.png" style="border: none; height: 40px" alt="Apache HTTP Components logo" /><br /> Apache HTTPClient</td>
+      <td>7+</td>
+      <td>2001</td>
+      <td>September 2020</td>
+      <td>Both</td>
+      <td>Futures</td>
+      <td>Currently only in the 5.1 beta</td>
+      <td>Yes</td>
+      <td>Yes</td>
+      <td>Yes</td>
+      <td>Basic<br />Digest<br />NTLM<br />SPNEGO<br />Kerberos<br />Pluggable</td>
+      <td>GZip Deflate</td>
+      <td>Yes</td>
+      <td>No</td>
+    </tr>
+    <tr>
+      <td><img src="/images/http-clients/square-logo.png" style="border: none; height: 50px" alt="Square logo" /><br /> OkHttp</td>
+      <td>8+</td>
+      <td>2013</td>
+      <td>September 2020</td>
+      <td>Both</td>
+      <td>Callbacks</td>
+      <td>Yes</td>
+      <td>Yes</td>
+      <td>Yes</td>
+      <td>Yes</td>
+      <td>Pluggable</td>
+      <td>GZip Deflate Brotli</td>
+      <td>Yes</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td>AsyncHttpClient</td>
+      <td>8+</td>
+      <td>2010</td>
+      <td>April 2020</td>
+      <td>Async only</td>
+      <td>Futures  Callbacks Reactive streams</td>
+      <td>No</td>
+      <td>Yes</td>
+      <td>Yes</td>
+      <td>Yes</td>
+      <td>None</td>
+      <td>No</td>
+      <td>Yes</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td><img src="/images/http-clients/jetty-logo.png" style="border: none; height: 40px" alt="Jetty logo" /><br /> Jetty HttpClient</td>
+      <td>8+</td>
+      <td>2009</td>
+      <td>July 2020</td>
+      <td>Both</td>
+      <td>Callbacks</td>
+      <td>Yes</td>
+      <td>Yes</td>
+      <td>Yes</td>
+      <td>Yes</td>
+      <td>Basic<br />Digest<br />SPNEGO<br />Pluggable</td>
+      <td>GZip</td>
+      <td>No</td>
+      <td>Yes</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>The following sections describe each client in detail.</p>
+
+<h2 id="httpurlconnection--httpsurlconnection">HttpURLConnection / HttpsURLConnection</h2>
+<p><img src="/images/http-clients/old-java-logo.png" style="border: none; height: 100px" alt="Old Java logo" /></p>
+
+<p><a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/net/HttpURLConnection.html" target="_blank"><em>HttpURLConnection</em></a> is the oldest of the clients we’re comparing, and probably the oldest in the Java ecosystem, having been introduced way back in version 1.1 of the JDK. Its HTTPS supporting counterpart HttpsURLConnection was introduced in Java 1.4.</p>
+
+<p>The main advantage of using these classes is that they’re guaranteed to be available, even in older Java versions, without the need to add any external dependencies.</p>
+
+<p>Arguably, however, that’s where the benefits end. These classes suffer from pretty clunky API design, only offer a synchronous/blocking API, have no HTTP/2 support and lack additional features such as compression and form handling.</p>
+
+<p>They also exhibit some pretty questionable (or buggy, depending on your view) <a href="https://bugs.java.com/bugdatabase/view_bug.do?bug_id=6382788" target="_blank">default behaviour</a> which has been retained throughout the versions for the sake of backwards compatibility.</p>
+
+<p>It’s worth noting that many “wrapper” clients such as Spring’s RestTemplate will use <em>Http(s)URLConnection</em> as their default underlying HTTP implementation, so you can often end up using it without realising. It’s always a good idea to check how your HTTP calls are being made under the hood!</p>
+
+<h3 id="configuration">Configuration</h3>
+<p><em>HttpURLConnection</em> supports the basic set of configuration options you’d expect, but not much more. The connection pool limit and keep-alive idle timeout are only available as system properties.</p>
+
+<h3 id="documentation">Documentation</h3>
+<p>The official documentation is pretty much limited to just the <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/net/HttpURLConnection.html" target="_blank">Javadoc page</a>, however, a plethora of 3rd party blog articles exist and at the time of writing, there are over 30k Stackoverflow questions relating to <em>HttpURLConnection</em>.</p>
+
+<h3 id="when-to-use">When to use</h3>
+<p>Use it if you’re not yet on Java 11+ and you’re unable to add any more 3rd party dependencies. Otherwise, avoid!</p>
+
+<h2 id="java-11-httpclient">Java 11+ HttpClient</h2>
+<p><img src="/images/http-clients/new-java-logo.png" style="border: none; height: 100px" alt="New Java logo" /></p>
+
+<p>Java 9 introduced a brand new HTTP client as an incubator module, and this was then made generally available in Java 11.</p>
+
+<p>The new client has a fluent, builder-driven API which is much more legible and easier to work with than <em>HttpURLConnection</em>. It supports both synchronous and asynchronous modes of operation, with the latter making use of Futures.</p>
+
+<p>A major benefit over the older Java client is support for HTTP/2, which is now becoming increasingly prevalent and offers some significant performance improvements over HTTP/1.1.</p>
+
+<p>The new client offers a pluggable authentication mechanism, only provides an implementation of non-preemptive HTTP Basic so if you need anything else you’ll need to implement it yourself.</p>
+
+<p>Transparent compression is not supported, so this is also something you’ll need to handle yourself if you need it.</p>
+
+<p>It does however provide support for cookies.</p>
+
+<h3 id="configuration-1">Configuration</h3>
+<p>Available configuration options are very similar to those for <em>HttpURLConnection</em>, with the connection pool limit and keep-alive idle timeout also only settable via system properties.</p>
+
+<p>Unlike the older client, the redirect policy can be set programmatically per client instance.</p>
+
+<h3 id="documentation-1">Documentation</h3>
+<p>The official documentation for the new <em>HttpClient</em> is a little bit better than for <em>HttpURLConnection</em>, consisting of a <a href="https://openjdk.java.net/groups/net/httpclient/recipes.html" target="_blank">recipes document</a> in addition to the <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.net.http/java/net/http/HttpClient.html" target="_blank">Javadoc</a>.</p>
+
+<p>However as the newest client in our list, inevitably less has been written about it in blogs and forums, so expect to work a little harder in the near future to find answers to your questions.</p>
+
+<h3 id="when-to-use-1">When to use</h3>
+<p>Use it if you’re already on Java 11+ and are happy with limited documentation and configuration options.</p>
+
+<h2 id="apache-httpclient">Apache HttpClient</h2>
+<p><img src="/images/http-clients/httpcomponents-logo.png" style="border: none; height: 100px" alt="Apache HTTP Components logo" /></p>
+
+<p>The Apache HTTP client was the first widely adopted open source client to be released, arriving in its original form in 2002. Now on its 5th major version, it’s probably still the most commonly used client outside of Java’s core libraries.</p>
+
+<p>The Apache client is rich in features and configuration options, although at the time of writing HTTP/2 is only supported in the 5.1 beta release.</p>
+
+<h3 id="community-and-maintenance">Community and maintenance</h3>
+<p><img src="/images/http-clients/apache-contribution-graph.png" style="border: none" alt="Apache client contribution graph" /></p>
+
+<p>As a top-level Apache project, <em>HTTPClient</em>’s future seems fairly well assured. Contributions continue to arrive at a steady rate, albeit one that’s a bit lower than the most actively maintained libraries in this article.</p>
+
+<h3 id="configuration-2">Configuration</h3>
+<p>One of the Apache client’s strengths is its configurability. Many features of the client such as connection management and name resolution are abstracted and pluggable, so it’s possible to extensively configure them in code, or even supply your own implementations. This makes the Apache client a good bet if you have unusual or tricky requirements.</p>
+
+<p>While it will accept parameters supplied via system properties, all configuration can be done at the client instance level.</p>
+
+<p>One gotcha to watch out for with the Apache client is the low default connection pool limits - 5 per route and 25 overall. These defaults can result in significant bottlenecks in high throughput systems, so it’s always wise to review and raise these before subjecting your app to live traffic.</p>
+
+<h3 id="documentation-2">Documentation</h3>
+<p>The Apache client’s documentation website is produced using the Maven site generator, so it isn’t the most modern reading experience. The content of the documentation is OK if not great, providing code samples for a variety of scenarios, but without much supporting narrative.</p>
+
+<p>Luckily, given how widely used <em>HTTPClient</em> is and its maturity there’s plenty of help available on Stack Overflow and 3rd party blog sites such as <a href="https://www.baeldung.com/httpclient-guide" target="_blank">Baeldung</a>.</p>
+
+<h3 id="when-to-use-2">When to use</h3>
+<p>The Apache client is a strong choice when you need extreme flexibility in configuring and customising behaviour. Teams that place a lot of value on familiarity and breadth of adoption may also find it the most comfortable option.</p>
+
+<h2 id="okhttpclient">OkHttpClient</h2>
+<p><img src="/images/http-clients/square-logo.png" style="border: none; height: 100px" alt="Square logo" /></p>
+
+<p><em>OkHttpClient</em> is an open source library originally released in 2013 by <a href="https://square.github.io/" target="_blank">Square</a>.</p>
+
+<p>The main motivation behind OkHttp is a strong focus on production readiness - performance, reliability and security. It natively supports HTTP/2 and TLS1.3+ and has a number of fault tolerance features such as the ability to fail over between multiple IP addresses and recover from failed connection attempts. It also implements transparent content compression via Deflate, GZip and Brotli, being the only client that supports the last of these.</p>
+
+<p><em>OkHttpClient</em>’s defaults are thoughtfully chosen. Provided you keep to the latest version, you’ll get a fast, secure and reliable setup without needing to do much of your own configuration.</p>
+
+<p>Since version 4 OkHttp has been written in Kotlin. Some teams see this as a downside as it means that the Kotlin standard library is pulled in as a transitive dependency (adding about 1.5MB at the time of writing), and also that debugging the client’s code is more difficult for developers not familiar with Kotlin.</p>
+
+<h3 id="community-and-maintenance-1">Community and maintenance</h3>
+<p><img src="/images/http-clients/okhttp-contribution-graph.png" style="border: none" alt="OkHttp client contribution graph" /></p>
+
+<p><em>OkHttp</em> continues to be sponsored by Square and shows a healthy, regular contribution rate. It has nearly 40k stars on GitHub and has been contributed to by over 200 individuals.</p>
+
+<h3 id="configuration-3">Configuration</h3>
+<p>Despite being strong on usable out-of-the-box defaults, <em>OkHttpClient</em> provides plenty of configuration options and extension points. Everything is configurable at the client instance level, so multiple clients can exist with different settings and it’s straightforward to integrate with your configuration system.</p>
+
+<p>Another configuration option OkHttp provides not seen elsewhere is separate read and write timeouts.</p>
+
+<h3 id="documentation-3">Documentation</h3>
+<p>The OkHttp <a href="https://square.github.io/okhttp/" target="_blank">documentation site</a> is very good and nicely presented. It provides a decent level of detail for all of the major topics, a decent API reference and a search function that actually works.</p>
+
+<h3 id="when-to-use-3">When to use</h3>
+<p>OkHttp is the client we’d recommend by default.</p>
+
+<p>It has all of the features you’re likely to need, both initially and in the future, and will probably give you the fewest headaches when running in production. It has extensive options for configuration and customisation, but will usually do a perfectly good job with its default settings.</p>
+
+<h2 id="asynchttpclient">AsyncHttpClient</h2>
+<p><em>AsyncHttpClient</em> was originally released in 2010, building on top of <a href="https://netty.io/" target="_blank">Netty</a> for fast, non-blocking I/O. Uniquely amongst our set of clients, it only presents an asynchronous API, however, it provides considerable flexibility here, supporting Futures, Callbacks and Reactive Streams API styles.</p>
+
+<h3 id="community-and-maintenance-2">Community and maintenance</h3>
+<p><img src="/images/http-clients/asynchttpclient-contribution-graph.png" style="border: none" alt="AsyncHttpClient contribution graph" /></p>
+
+<p>The project has mostly seen a decent level of contribution activity over the last few years. However, as of June 2020, the lead maintainer of <em>AsyncHttpClient</em> has stepped down and is looking for a successor so its future is currently somewhat uncertain.</p>
+
+<h3 id="configuration-4">Configuration</h3>
+<p><em>AsyncHttpClient</em> provides a wealth of configuration options, allowing very fine-grained tuning of timeouts, thread pools and other high and low-level parameters. All of these are all settable from when building a client instance.</p>
+
+<h3 id="documentation-4">Documentation</h3>
+<p>Official documentation is limited to the README document on GitHub, which provides an adequate but brief overview of the major features and a path to getting started. It links to several blog posts which go into a bit more depth, but these are 9-10 years old so are of limited utility.</p>
+
+<p>A search of Stack Overflow for “asynchttpclient” yields a little over 2k results, so while you may have some success finding answers there, there’s significantly less content than for most of the other clients discussed in this article.</p>
+
+<h3 id="when-to-use-4">When to use</h3>
+<p>We’d hesitate to recommend <em>AsyncHttpClient</em> at this point in time due to the uncertainty around its ongoing maintenance.</p>
+
+<p>However, if you’re comfortable with this risk and need a battle-tested, high performing non-blocking client then it’s still worth a look.</p>
+
+<h2 id="jetty-httpclient">Jetty HttpClient</h2>
+<p><img src="/images/http-clients/jetty-logo.png" style="border: none; height: 80px" alt="Jetty logo" /></p>
+
+<p>The Jetty client has been an integral part of the Jetty project since 2009. It uses entirely non-blocking code under the hood and presents both synchronous and asynchronous APIs.</p>
+
+<p>HTTP/2 is supported via the inclusion of an additional library.</p>
+
+<h3 id="community-and-maintenance-3">Community and maintenance</h3>
+<p><img src="/images/http-clients/jetty-contribution-graph.png" style="border: none" alt="Jetty contribution graph" />
+[Contribution graph for the Jetty project overall]</p>
+
+<p>The Jetty project lives within the Eclipse foundation. It’s also backed by a commercial company - Webtide. Their staff (including Jetty’s originator) make regular contributions to the project and are responsive to bug reports and queries.</p>
+
+<h3 id="configuration-5">Configuration</h3>
+<p>The Jetty client provides a pretty comprehensive set of configuration options. These include all of the obvious settings you’d want to tweak, plus access to lower-level tuning parameters such as the executor implementation, scheduler and byte buffer pools.</p>
+
+<p>One notable absence is an overall connection pool limit parameter. However, it is possible to set a per-destination limit for pooled connections, which in practice is often the more useful parameter.</p>
+
+<h3 id="documentation-5">Documentation</h3>
+<p>The <a href="https://www.eclipse.org/jetty/documentation/current/http-client.html" target="_blank">Jetty client documentation pages</a> are reasonably good, with a decent “getting started” section and fairly detailed coverage of the major features. Plenty of code examples are provided, with supporting narrative.</p>
+
+<h3 id="when-to-use-5">When to use</h3>
+<p>The Jetty client supports HTTP/2 and is very configurable, which makes it a good alternative to the OkHttp client if you’re not happy with the latter’s Kotlin dependencies.</p>
+
+<p>It may also be the right choice if you’re using Jetty server already since they share a fair amount of common code and API design. This means that things like TLS configuration work very similarly across client and server.</p>
+
+<h2 id="conclusions">Conclusions</h2>
+<p>Hopefully, if you’ve made it this far, you’re now more informed about the range of HTTP clients available in the Java ecosystem and how to go about selecting one for your project.</p>
+
+<p>We’d definitely recommend avoiding <em>HttpURLConnection</em> unless you really have no alternative, particularly now that the Java 11+ <em>HttpClient</em> is available.</p>
+
+<p>If ultimate flexibility is what you need and you can do without HTTP/2 for the time being, the venerable Apache client may be the one to aim for. You’ll also benefit from its very widespread use and the abundance of information around the internet.</p>
+
+<p>However, all things being equal Square’s <em>OkHttpClient</em> would be our recommendation for teams choosing a new client library. It’s feature-rich, highly configurable and works well in production out of the box.</p>
+
+<h2 id="about-mocklab">About MockLab</h2>
+
+<p>MockLab is a hosted API mocking tool built on WireMock by its creators. It helps
+teams quickly simulate their external API dependencies so that they can ship faster and test more
+thoroughly.</p>
+
+<p>For more information, visit <a href="https://get.mocklab.io?utm_source=www.mocklab.io&amp;utm_medium=blog&amp;utm_campaign=http_clients_article-bottom_cta">https://get.mocklab.io</a>.</p>]]></content><author><name>Tom Akehurst</name></author><category term="Java" /><category term="HTTP" /><summary type="html"><![CDATA[A comparison of all the major Java HTTP clients]]></summary></entry><entry><title type="html">MockLab Now Supports Swagger and Swaggerhub</title><link href="https://www.mocklab.io/blog/mocklab-now-supports-swagger-and-swaggerhub/" rel="alternate" type="text/html" title="MockLab Now Supports Swagger and Swaggerhub" /><published>2018-08-03T00:00:00+01:00</published><updated>2018-08-03T00:00:00+01:00</updated><id>https://www.mocklab.io/blog/mocklab-now-supports-swagger-and-swaggerhub</id><content type="html" xml:base="https://www.mocklab.io/blog/mocklab-now-supports-swagger-and-swaggerhub/"><![CDATA[<p><img src="/images/screenshots/swagger-logo2.png" alt="Swagger logo" style="border:none" /></p>
+
+<p><a href="https://swagger.io/" target="_blank">Swagger</a> (or the OpenAPI Specification as it’s now known) has become the de-facto standard
+way to specify, document and test REST-like APIs.</p>
+
+<p>Given Swagger’s broad adoption and language/stack compatibility, being able to generate a
+mock API from a Swagger specification offers a substantial productivity boost over coding or hand-crafting.
+In addition it provides a way to ensure your mock API stays true to the real thing as it evolves.</p>
+
+<p>This is why we’ve launched a first beta of Swagger import in MockLab. This new feature provides a number of ways
+to generate and re-generate your mock API’s stubs from a Swagger specification.</p>
+
+<h2 id="how-it-works">How it works</h2>
+
+<p>The simplest way to get started is to paste your API spec into MockLab’s web UI:</p>
+
+<p><img src="/images/screenshots/stub-toolbar-with-import3.png" alt="Stub toolbar" style="border: none;" /></p>
+
+<p><img src="/images/screenshots/import-stubs-dialog.png" alt="Stub toolbar" style="border-radius: 3px;" /></p>
+
+<p>If you want to regularly push new specification versions via an automated process, you can do so by posting it
+to MockLab’s API. See <a href="/docs/swagger/#automating-imports-via-the-api">the documentation page</a> for details.</p>
+
+<p>On submission of a valid spec, MockLab will generate a collection of new stubs, for each combination of URL template, operation and content type.
+If the spec contains response examples, these will be used, but if not the generator will fall back on the JSON schema, emitting random values that
+conform to the schema constraints.</p>
+
+<h2 id="swaggerhub">Swaggerhub</h2>
+
+<p><img src="/images/screenshots/swaggerhub-hero.png" alt="Swaggerhub hero" /></p>
+
+<p><a href="https://swaggerhub.com">Swaggerhub</a> is a hosted product from Smartbear that supports authoring, collaboration and documentation of APIs.</p>
+
+<p>A cool feature of Swaggerhub is its ability to call a webhook when a spec is saved or published. It’s extremely simple to set up MockLab as
+a receiver - just create a new webhook in the Integrations menu (<img src="/images/screenshots/swaggerhub-integrations-icon.png" alt="Swaggerhub integrations icon" style="border:none; width: 52px;" />) with a payload URL of <code class="language-plaintext highlighter-rouge">http://my-swagger-api.mocklab.io/__admin/imports/swaggerhub</code> (substituting <code class="language-plaintext highlighter-rouge">my-swagger-api</code> with your API’s domain name):</p>
+
+<p><img src="/images/screenshots/swaggerhub-webhook-dialog.png" alt="Swaggerhub webhook dialog" /></p>
+
+<p>Once you’ve added this, try saving your API then heading back to MockLab and refreshing your stubs.</p>
+
+<p>As I mentioned at the start, this is a first beta release, and we intend to evolve and improve Swagger support based on the feedback from real use. If you love, hate or simply think this feature could be improved please drop us a message in the chat widget or
+<a href="mailto:info@mocklab.io">by email</a> and let us know!</p>
+
+<div class="mid-article-cta">
+  <p class="mid-article-cta__text">
+    If you've made it this far there's a good chance you're building a system that
+    relies on 3rd party APIs. MockLab can help you test your system when those
+    APIs don't exist yet, have flakey test environments or are expensive to call.
+  </p>
+
+  <p class="mid-article-cta__text">
+    It's quick and simple to get started with and it's powered by WireMock so it
+    has the flexibility to grow with your project's testing demands.
+  </p>
+
+  <a class="mid-article-cta__learn-more" href="https://get.mocklab.io/?utm_source=www.mocklab.io&amp;utm_medium=blog&amp;utm_campaign=swagger-and-swaggerhub-learn-more-cta" title="Learn more" target="_blank">Learn more</a>
+
+  <a class="mid-article-cta__get-started" href="https://app.mocklab.io/login?for=signup&amp;utm_source=www.mocklab.io&amp;utm_medium=blog&amp;utm_campaign=swagger-and-swaggerhub-get-started-cta" title="Get started for free" target="_blank">Get started for free</a>
+</div>]]></content><author><name>Tom Akehurst</name></author><category term="MockLab" /><category term="API Mocking" /><category term="Open API Specification" /><category term="Swagger" /><category term="Swaggerhub" /><summary type="html"><![CDATA[MockLab now supports import of Swagger documents and integration with Swaggerhub]]></summary></entry><entry><title type="html">Build a Paypal Sandbox for Load Testing in 10 Minutes</title><link href="https://www.mocklab.io/blog/build-a-paypal-sandbox-for-load-testing/" rel="alternate" type="text/html" title="Build a Paypal Sandbox for Load Testing in 10 Minutes" /><published>2018-07-10T00:00:00+01:00</published><updated>2018-07-10T00:00:00+01:00</updated><id>https://www.mocklab.io/blog/build-a-paypal-sandbox-for-load-testing</id><content type="html" xml:base="https://www.mocklab.io/blog/build-a-paypal-sandbox-for-load-testing/"><![CDATA[<div class="video">
+<script src="https://fast.wistia.com/embed/medias/tz7u9ot0sj.jsonp" async=""></script><script src="https://fast.wistia.com/assets/external/E-v1.js" async=""></script><div class="wistia_responsive_padding" style="padding:56.25% 0 0 0;position:relative;"><div class="wistia_responsive_wrapper" style="height:100%;left:0;position:absolute;top:0;width:100%;"><div class="wistia_embed wistia_async_tz7u9ot0sj videoFoam=true" style="height:100%;position:relative;width:100%"><div class="wistia_swatch" style="height:100%;left:0;opacity:0;overflow:hidden;position:absolute;top:0;transition:opacity 200ms;width:100%;"><img src="https://fast.wistia.com/embed/medias/tz7u9ot0sj/swatch" style="filter:blur(5px);height:100%;object-fit:contain;width:100%;" alt="" onload="this.parentNode.style.opacity=1;" /></div></div></div></div>
+</div>
+
+<p>Modern e-commerce websites and apps need to be fast and stable in order to avoid losing swathes of customers to competitors.</p>
+
+<p>Achieving this requires regular performance testing of systems, but this is a problem for sites that accept payments with Paypal since
+running high load against their sandbox is specifically prohibited by their terms of service.</p>
+
+<p>So what can you do?</p>
+
+<p>One option is to simply have your load test stop short of the final step of your checkout. This is less than ideal for (hopefully) obvious reasons.</p>
+
+<p>Another option is to mock the part of the app’s code that calls Paypal during load testing. This is an improvement, but still means critical bits of code
+used in production won’t be tested.</p>
+
+<p>A better solution is to build a simulation of the Paypal API and connect your test environment to it.</p>
+
+<p>MockLab is a tool specifically built for this purpose, and the rest of this article will focus on how you can use it to quickly construct a mock Paypal API
+suitable for performance testing.</p>
+
+<h2 id="setup">Setup</h2>
+
+<p>To begin, you need to have logged into MockLab and created a new, empty mock API. You can <a href="https://app.mocklab.io/login?for=signup" target="_blank">sign up here</a> if you haven’t already.</p>
+
+<p>Once you’ve created a new mock API, grab a copy of its base URL. You can find this in the title bar:</p>
+
+<p><img src="/images/screenshots/paypal-article/base-url.png" alt="Base URL" style="width: 70%" /></p>
+
+<p>You’ll also need the client ID and client secret from your Paypal Sandbox account.</p>
+
+<p>We’ve developed a simple demo app for this tutorial. If you’d like to download and run this you can find it at <a href="https://github.com/mocklab/mocklab-demo-app" target="_blank">https://github.com/mocklab/mocklab-demo-app</a></p>
+
+<p>Once you’ve checked out the app, set the Paypal endpoint in <code class="language-plaintext highlighter-rouge">src/main/resources/application.properties</code> to your mock API’s base URL:</p>
+
+<p><img src="/images/screenshots/paypal-article/app-config.png" alt="App configuration" style="width: 70%" /></p>
+
+<p>Then start the app:</p>
+
+<p>[Linux/OSX]</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">export </span><span class="nv">PAYPAL_CLIENT_ID</span><span class="o">=</span>&lt;your client ID&gt;
+<span class="nb">export </span><span class="nv">PAYPAL_CLIENT_SECRET</span><span class="o">=</span>&lt;your client secret&gt;
+ ./gradlew bootRun
+</code></pre></div></div>
+
+<p>[Windows]</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>set PAYPAL_CLIENT_ID=&lt;your client ID&gt;
+set PAYPAL_CLIENT_SECRET=&lt;your client secret&gt;
+gradlew bootRun
+</code></pre></div></div>
+
+<h2 id="recording-initial-stubs">Recording initial stubs</h2>
+
+<p>In MockLab, hit the Record button, set the target URL as Paypal’s sandbox then start recording:</p>
+
+<p><img src="/images/screenshots/paypal-article/recorder.png" alt="Stub recorder" style="width: 70%; border: none" /></p>
+
+<p>Go to <a href="http://localhost:9000/paypal" target="_blank">http://localhost:9000/paypal</a>, enter an amount and complete a Payment:</p>
+
+<p><img src="/images/screenshots/paypal-article/paypal-demo-app.png" alt="Paypal demo app" style="width: 70%; border: none" /></p>
+
+<p>Return to MockLab and stop recording. You should now see two stubs have been appeared in the list, one for the prepare payment step and one for execute payment.</p>
+
+<p>If you wish you can test these with the internal request maker or an HTTP client like Postman:</p>
+
+<p><img src="/images/screenshots/paypal-article/test-request-1.png" alt="Test request in Postman" /></p>
+
+<h2 id="making-performance-ready">Making performance ready</h2>
+
+<p>Recorded stubs are by default very specific. They will only be matched to an incoming request if the method, URL and body match exactly. In practice this
+means they’ll only work for the exact same payment ID and amount.</p>
+
+<p>Additionally they will return the same response each time,
+meaning IDs and dates you’d expect to be unique between requests will be the same. This causes problems if, for instance, the payment ID is saved
+in a unique field by your app.</p>
+
+<p>All of these issues can be resolved using MockLab’s advanced matching and templated responses.</p>
+
+<h3 id="create-payment">Create payment</h3>
+
+<p>Open the create payment stub first (the one with URL <code class="language-plaintext highlighter-rouge">/v1/payments/payment</code>). The generated name is a bit ugly so you may wish to change this to something
+more readable.</p>
+
+<p>Next up, in the Advanced section you’ll notice there’s a body matcher for the exact JSON that was sent during recording. We don’t need this, since we want to respond
+to any create payment request, so delete this.</p>
+
+<p><img src="/images/screenshots/paypal-article/request-body.png" alt="Request body" style="width: 90%; border: none" /></p>
+
+<p>We want to ensure we’re sending a unique payment ID in the response each time. To do this, we need to enable <a href="/docs/response-templating/">response templating</a>:</p>
+
+<p><img src="/images/screenshots/enable-response-templating-screenshot.png" alt="Enable response templating" style="width: 30%" /></p>
+
+<p>Then we need to generate a random ID for each response. We can do this by first assigning a variable by adding this line at the top of the response body:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{{#assign 'paymentId'}}PAY-{{randomValue length=24 type='ALPHANUMERIC' uppercase=true}}{{/assign}}
+</code></pre></div></div>
+
+<p>and replacing instances of the payment ID with the variable we set e.g.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>"id": "{{paymentId}}"
+</code></pre></div></div>
+
+<p>We also may wish to set the <code class="language-plaintext highlighter-rouge">create_time</code> field to the current time, rather than it being fixed at the one captured at record time:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>"create_time": "{{now}}"
+</code></pre></div></div>
+
+<p>Putting it all together it should look something like this:</p>
+
+<p><img src="/images/screenshots/paypal-article/create-payment-body.png" alt="Templated create payment body" style="border: none" /></p>
+
+<h3 id="execute-payment">Execute payment</h3>
+
+<p>We need to give similar treatment to the execute payment stub, with a key difference: rather than generating the payment ID at random,
+we want to extract it from the request URL.</p>
+
+<p>You’ll notice the request URL for the execute step is also very specific - it will only match the exact payment ID passed. We can fix this by
+converting it to a regular expression (not that the URL match type has also changed to ‘Path Regex’):</p>
+
+<p><img src="/images/screenshots/paypal-article/url-regex.png" alt="URL regular expression" style="border: none" /></p>
+
+<p>Next we’ll give the response body the same treatment as with the create payment stub, but extracting the ID from the URL:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{{#assign 'paymentId'}}{{request.path.[3]}}{{/assign}}
+</code></pre></div></div>
+
+<p>(Ensure you change substitute the <code class="language-plaintext highlighter-rouge">paymentId</code> variables <code class="language-plaintext highlighter-rouge">now</code> variables where appropriate as before)</p>
+
+<h2 id="adding-delays-for-extra-realism">Adding delays for extra realism</h2>
+
+<p>Since stubbed responses tend to return faster than from real APIs, this can create misleading outcomes when performance testing. To remedy this,
+you can add some artificial delay to your stubs:</p>
+
+<p><img src="/images/screenshots/paypal-article/random-delay.png" alt="Random delay" style="width: 70%" /></p>
+
+<h2 id="validating-your-stubs">Validating your stubs</h2>
+
+<p>You may wish to quickly test your updated stubs before pressing them into service. Again, you can do this with a tool like Postman, or
+with MockLab’s own test request maker:</p>
+
+<p><img src="/images/screenshots/paypal-article/test-requester.png" alt="Test requester" /></p>
+
+<h2 id="load-testing">Load testing</h2>
+
+<p>Now your mock API is ready for use. You can try it out by running the JMeter from the demo project and opening <code class="language-plaintext highlighter-rouge">paypal-demo.jmx</code>.</p>
+
+<p>You can start JMeter like this:</p>
+
+<p>[Linux/OSX]</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd mocklab-demo-app
+apache-jmeter-4.0/bin/jmeter.sh
+</code></pre></div></div>
+
+<p>[Windows]</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd mocklab-demo-app
+apache-jmeter-4.0/bin/jmeter
+</code></pre></div></div>
+
+<p><img src="/images/screenshots/paypal-article/jmeter.png" alt="JMeter" style="border:none" /></p>
+
+<p>Then just hit play to start testing!</p>
+
+<div class="mid-article-cta">
+  <p class="mid-article-cta__text">
+    If you've made it this far there's a good chance you're building a system that
+    relies on 3rd party APIs. MockLab can help you test your system when those
+    APIs don't exist yet, have flakey test environments or are expensive to call.
+  </p>
+
+  <p class="mid-article-cta__text">
+    It's quick and simple to get started with and it's powered by WireMock so it
+    has the flexibility to grow with your project's testing demands.
+  </p>
+
+  <a class="mid-article-cta__learn-more" href="https://get.mocklab.io/?utm_source=www.mocklab.io&amp;utm_medium=blog&amp;utm_campaign=paypal-in-10-minutes-learn-more-cta" title="Learn more" target="_blank">Learn more</a>
+
+  <a class="mid-article-cta__get-started" href="https://app.mocklab.io/login?for=signup&amp;utm_source=www.mocklab.io&amp;utm_medium=blog&amp;utm_campaign=paypal-in-10-minutes-get-started-cta" title="Get started for free" target="_blank">Get started for free</a>
+</div>]]></content><author><name>Tom Akehurst</name></author><category term="MockLab" /><category term="API Mocking" /><category term="Performance Testing" /><category term="Paypal" /><summary type="html"><![CDATA[Build a mock of the Paypal API to allow end to end load testing of your e-commerce app]]></summary></entry></feed>

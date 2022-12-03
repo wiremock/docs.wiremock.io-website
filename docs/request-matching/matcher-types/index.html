@@ -1,0 +1,830 @@
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    
+
+<meta charset="utf-8">
+
+
+
+<!-- begin SEO -->
+
+
+
+
+
+
+
+
+
+<title>Request Matching - Overview of Matcher Types | MockLab</title>
+
+
+
+
+
+
+
+<meta name="description" content="Overview of the match operations supported by MockLab">
+
+<meta property="og:locale" content="en-US">
+<meta property="og:site_name" content="MockLab">
+<meta property="og:title" content="Request Matching - Overview of Matcher Types">
+
+
+  <link rel="canonical" href="https://www.mocklab.io/docs/request-matching/matcher-types/">
+  <meta property="og:url" content="https://www.mocklab.io/docs/request-matching/matcher-types/">
+
+
+
+  <meta property="og:description" content="Overview of the match operations supported by MockLab">
+
+
+
+  <meta property="keywords" content="">
+
+
+
+
+
+  
+
+  
+
+
+
+  <meta property="og:image" content="https://www.mocklab.io/images/mocklab_logo_with_text_large.png">
+
+
+
+  <meta property="og:type" content="article">
+  <meta property="article:published_time" content="2022-12-03T16:39:34+00:00">
+  
+    <link rel="next" href="https://www.mocklab.io/docs/request-matching/url/" title="Request Matching - Matching URLs">
+  
+  
+    <link rel="prev" href="https://www.mocklab.io/docs/request-matching/json/" title="Request Matching - Matching JSON requests">
+  
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Organization",
+      "url": "https://www.mocklab.io",
+      "logo": "https://www.mocklab.io/images/https://www.mocklab.io/images/mocklab_logo_with_text_large.png"
+    }
+  </script>
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context" : "http://schema.org",
+      "@type" : "Person",
+      "name" : "",
+      "url" : "https://www.mocklab.io",
+      "sameAs" : null
+    }
+  </script>
+
+
+
+
+
+
+<!-- end SEO -->
+
+
+<link href="https://www.mocklab.io/feed.xml" type="application/atom+xml" rel="alternate" title="MockLab Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<link href="https://fonts.googleapis.com/css?family=Cairo:300" rel="stylesheet">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="https://www.mocklab.io/assets/css/main.css">
+
+<meta http-equiv="cleartype" content="on">
+
+<link rel="shortcut icon" type="image/x-icon" href="https://www.mocklab.io/images/favicon.png">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.js@1/dist/instantsearch.min.css" />
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.0/dist/instantsearch-theme-algolia.min.css">
+
+    <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "5oa515rnev");
+</script>
+
+  </head>
+
+  <body>
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+    
+
+<nav class="header-nav sticky">
+  <ul class="header-nav__container">
+    <li class="header-nav__logo">
+        <a href="https://get.mocklab.io">
+            <img src="/images/mocklab_logo_with_text.png" title="MockLab logo" alt="MockLab logo"/>
+        </a>
+    </li>
+
+    <li class="header-nav__item">
+        <a href="/docs/getting-started/" title="Docs">Docs</a>
+    </li>
+    <li class="header-nav__item">
+        <a href="/blog/" title="Docs">Blog</a>
+    </li>
+    <li class="header-nav__item">
+        <a href="https://get.mocklab.io/pricing" title="Docs">Pricing</a>
+    </li>
+    <li class="header-nav__item header-nav__item--last">
+        <a href="https://app.mocklab.io" title="Login" target="_blank">Login</a>
+    </li>
+
+    <li class="header-nav__cta">
+        <a href="https://app.mocklab.io/login?for=signup" title="Sign up" target="_blank">Sign up</a>
+    </li>
+  </ul>
+
+</nav>
+
+    
+
+<div id="main" role="main">
+  
+
+<div class="sidebar">
+  <nav class="nav__list">
+    <ul class="doc-categories">
+      
+        <li class="doc-category">
+          <span class="doc-category__title">Setup & Configuration</span>
+          <ul class="doc-category__links">
+            
+              
+              
+              <li>
+                <a href="https://www.mocklab.io/docs/getting-started/">
+
+                
+                Getting Started
+                </a>
+              </li>
+            
+              
+              
+              <li>
+                <a href="https://www.mocklab.io/docs/teams-and-collaboration/">
+
+                
+                Teams and Collaboration
+                </a>
+              </li>
+            
+              
+              
+              <li>
+                <a href="https://www.mocklab.io/docs/security/">
+
+                
+                Security
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li class="doc-category">
+          <span class="doc-category__title">Stubbing</span>
+          <ul class="doc-category__links">
+            
+              
+              
+              <li>
+                <a href="https://www.mocklab.io/docs/stubbing/">
+
+                
+                 Basics
+                </a>
+              </li>
+            
+              
+              
+              <li>
+                <a href="https://www.mocklab.io/docs/advanced-stubbing/">
+
+                
+                Advanced 
+                </a>
+              </li>
+            
+              
+              
+              <li>
+                <a href="https://www.mocklab.io/docs/delays/">
+
+                
+                Response Delays
+                </a>
+              </li>
+            
+              
+              
+              <li>
+                <a href="https://www.mocklab.io/docs/simulating-faults/">
+
+                
+                Simulating Faults
+                </a>
+              </li>
+            
+              
+              
+              <li>
+                <a href="https://www.mocklab.io/docs/stateful-scenarios/">
+
+                
+                Simulating State with Scenarios
+                </a>
+              </li>
+            
+              
+              
+              <li>
+                <a href="https://www.mocklab.io/docs/proxying/">
+
+                
+                Proxying
+                </a>
+              </li>
+            
+              
+              
+              <li>
+                <a href="https://www.mocklab.io/docs/soap-stubbing/">
+
+                
+                Working with SOAP
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li class="doc-category">
+          <span class="doc-category__title">Request Matching</span>
+          <ul class="doc-category__links">
+            
+              
+              
+              <li>
+                <a href="/docs/request-matching/matcher-types/" class="nav__list-item--selected">
+                
+
+                
+                Overview of Matcher Types
+                </a>
+              </li>
+            
+              
+              
+              <li>
+                <a href="https://www.mocklab.io/docs/request-matching/url/">
+
+                
+                Matching URLs
+                </a>
+              </li>
+            
+              
+              
+              <li>
+                <a href="https://www.mocklab.io/docs/request-matching/json/">
+
+                
+                Matching JSON requests
+                </a>
+              </li>
+            
+              
+              
+              <li>
+                <a href="https://www.mocklab.io/docs/request-matching/xml/">
+
+                
+                Matching XML bodies
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li class="doc-category">
+          <span class="doc-category__title">Response Templating</span>
+          <ul class="doc-category__links">
+            
+              
+              
+              <li>
+                <a href="https://www.mocklab.io/docs/response-templating/basics/">
+
+                
+                Basics
+                </a>
+              </li>
+            
+              
+              
+              <li>
+                <a href="https://www.mocklab.io/docs/response-templating/conditional-logic-and-iteration/">
+
+                
+                Conditional Logic and Iteration
+                </a>
+              </li>
+            
+              
+              
+              <li>
+                <a href="https://www.mocklab.io/docs/response-templating/string-helpers/">
+
+                
+                String Helpers
+                </a>
+              </li>
+            
+              
+              
+              <li>
+                <a href="https://www.mocklab.io/docs/response-templating/string-encodings/">
+
+                
+                String Encodings
+                </a>
+              </li>
+            
+              
+              
+              <li>
+                <a href="https://www.mocklab.io/docs/response-templating/number-helpers/">
+
+                
+                Number Helpers
+                </a>
+              </li>
+            
+              
+              
+              <li>
+                <a href="https://www.mocklab.io/docs/response-templating/dates-and-times/">
+
+                
+                Dates and Times
+                </a>
+              </li>
+            
+              
+              
+              <li>
+                <a href="https://www.mocklab.io/docs/response-templating/random-values/">
+
+                
+                Random Values
+                </a>
+              </li>
+            
+              
+              
+              <li>
+                <a href="https://www.mocklab.io/docs/response-templating/xml/">
+
+                
+                Working with XML
+                </a>
+              </li>
+            
+              
+              
+              <li>
+                <a href="https://www.mocklab.io/docs/response-templating/json/">
+
+                
+                Working with JSON
+                </a>
+              </li>
+            
+              
+              
+              <li>
+                <a href="https://www.mocklab.io/docs/response-templating/jwt/">
+
+                
+                JSON Web Tokens (JWT)
+                </a>
+              </li>
+            
+              
+              
+              <li>
+                <a href="https://www.mocklab.io/docs/response-templating/misc-helpers/">
+
+                
+                Miscellaneous Helpers
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li class="doc-category">
+          <span class="doc-category__title">Import & Export</span>
+          <ul class="doc-category__links">
+            
+              
+              
+              <li>
+                <a href="https://www.mocklab.io/docs/import-and-export/">
+
+                
+                Overview
+                </a>
+              </li>
+            
+              
+              
+              <li>
+                <a href="https://www.mocklab.io/docs/import-export/wiremock/">
+
+                
+                WireMock
+                </a>
+              </li>
+            
+              
+              
+              <li>
+                <a href="https://www.mocklab.io/docs/swagger/">
+
+                
+                Swagger and OpenAPI
+                </a>
+              </li>
+            
+              
+              
+              <li>
+                <a href="https://www.mocklab.io/docs/import-export/postman/">
+
+                
+                Postman
+                </a>
+              </li>
+            
+              
+              
+              <li>
+                <a href="https://www.mocklab.io/docs/import-export/api/">
+
+                
+                Via the API
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li class="doc-category">
+          <span class="doc-category__title">Record & Playback</span>
+          <ul class="doc-category__links">
+            
+              
+              
+              <li>
+                <a href="https://www.mocklab.io/docs/recording-stubs/">
+
+                
+                Recording Stubs
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li class="doc-category">
+          <span class="doc-category__title">Tutorials</span>
+          <ul class="doc-category__links">
+            
+              
+              
+              <li>
+                <a href="https://www.mocklab.io/docs/mock-rest-api/">
+
+                
+                How to build a mock REST API
+                </a>
+              </li>
+            
+              
+              
+              <li>
+                <a href="https://www.mocklab.io/docs/exploratory-testing-tutorial/">
+
+                
+                Exploratory Testing a Spring Boot App
+                </a>
+              </li>
+            
+              
+              
+              <li>
+                <a href="https://www.mocklab.io/docs/automated-testing-with-java/">
+
+                
+                Automated Testing with Java
+                </a>
+              </li>
+            
+              
+              
+              <li>
+                <a href="https://www.mocklab.io/docs/default-responses/">
+
+                
+                Serving a Default Response
+                </a>
+              </li>
+            
+              
+              
+              <li>
+                <a href="https://www.mocklab.io/docs/oauth2-mock/">
+
+                
+                The OAuth2 / OpenID Connect Mock
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li class="doc-category">
+          <span class="doc-category__title">API References</span>
+          <ul class="doc-category__links">
+            
+              
+              
+              <li>
+                <a href="https://www.mocklab.io/docs/mocking/">
+
+                
+                API Reference: Mocking
+                </a>
+              </li>
+            
+              
+              
+              <li>
+                <a href="https://www.mocklab.io/docs/provisioning/">
+
+                
+                API Reference: Provisioning
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li class="doc-category">
+          <span class="doc-category__title">Policies</span>
+          <ul class="doc-category__links">
+            
+              
+              
+              <li>
+                <a href="https://www.mocklab.io/docs/terms-and-conditions/">
+
+                
+                MockLab Terms of Service
+                </a>
+              </li>
+            
+              
+              
+              <li>
+                <a href="https://www.mocklab.io/docs/privacy-policy/">
+
+                
+                Privacy Policy
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+    </ul>
+
+  </nav>
+</div>
+
+
+  <article class="doc-page" itemscope itemtype="http://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Request Matching - Overview of Matcher Types">
+    <meta itemprop="description" content="MockLab (via WireMock) supports a set of match operations that can be used againstthe request’s query, headers, cookies and body.">
+    <meta itemprop="datePublished" content="December 03, 2022">
+    
+
+    <div class="page__inner-wrap">
+      <header>
+        <h1 class="page__title" itemprop="headline">Request Matching - Overview of Matcher Types
+</h1>
+      </header>
+      <section class="page__content" itemprop="text">
+        <p>MockLab (via WireMock) supports a set of match operations that can be used against
+the request’s query, headers, cookies and body.</p>
+
+<p>This article provides an overview of these matchers. The names shown are the exact
+keys used in the WireMock/MockLab JSON API.</p>
+
+<h2 id="equalto"><code class="language-plaintext highlighter-rouge">equalTo</code></h2>
+
+<p>Only matches if the input string is exactly equal to the expected value.</p>
+
+<h2 id="binaryequalto"><code class="language-plaintext highlighter-rouge">binaryEqualTo</code></h2>
+
+<p>Like <code class="language-plaintext highlighter-rouge">equalTo</code> but compares bytes rather than strings. Useful when you need to match
+e.g. an uploaded image.</p>
+
+<h2 id="matches"><code class="language-plaintext highlighter-rouge">matches</code></h2>
+
+<p>Matches the input string against a <a href="https://docs.oracle.com/javase/8/docs/api/java/util/regex/Pattern.html" target="_blank">Java style regular expression</a>.</p>
+
+<h2 id="doesnotmatch"><code class="language-plaintext highlighter-rouge">doesNotMatch</code></h2>
+
+<p>The negative of <code class="language-plaintext highlighter-rouge">matches</code>. Will match if the incoming value does <strong>not</strong> match the regular expression.</p>
+
+<h2 id="contains"><code class="language-plaintext highlighter-rouge">contains</code></h2>
+
+<p>Matches if the input string contains the expected value.</p>
+
+<h2 id="equaltojson"><code class="language-plaintext highlighter-rouge">equalToJson</code></h2>
+
+<p>Matches if the input string is valid JSON and is semantically equal to the expected value.
+This is often a better choice than <code class="language-plaintext highlighter-rouge">equalTo</code> when dealing with JSON as it will ignore
+differences in whitespace, and it is optionally possible to ignore array orderings
+and extra object attributes. It also provides the concept of placeholders, allowing
+you to selectively ignore or merely constrain specific JSON elements.</p>
+
+<p>The underlying implementation for <code class="language-plaintext highlighter-rouge">equalToJson</code> is supplied by
+<a href="https://github.com/lukas-krecan/JsonUnit" target="_blank">JSONUnit</a>.</p>
+
+<p>You can learn more about working with JSON in the <a href="/docs/request-matching/json/">Matching JSON</a> article.</p>
+
+<h2 id="matchesjsonpath"><code class="language-plaintext highlighter-rouge">matchesJsonPath</code></h2>
+
+<p>Tests the input JSON string against a JSONPath expression, and returns a match if
+one or more elements are returned. No match will be returned if the input is not valid
+JSON.</p>
+
+<p>The actual JSONPath evaluation is performed by the <a href="[JSONPath](https://github.com/json-path/JsonPath)" target="_blank">Java JSONPath implmementation</a>.</p>
+
+<h2 id="equaltoxml"><code class="language-plaintext highlighter-rouge">equalToXml</code></h2>
+
+<p>Matches if the input string is valid XML and is semantically equal to the expected value.
+Like with <code class="language-plaintext highlighter-rouge">matchesJsonPath</code> this ignores differences in whitespace and supports placeholders
+so that specific element values can be ignored.</p>
+
+<p>The underlying implementation for <code class="language-plaintext highlighter-rouge">equalToXml</code> is supplied by
+<a href="https://www.xmlunit.org/" target="_blank">XMLUnit</a>.</p>
+
+<p>You can learn more about working with XML in the <a href="/docs/request-matching/xml/">Matching XML</a> article.</p>
+
+<h2 id="matchesxpath"><code class="language-plaintext highlighter-rouge">matchesXPath</code></h2>
+
+<p>Tests the input XML string against an XPath 1.0 expression, and returns a match if
+one or more elements are returned. No match will be returned if the input is not valid
+XML.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+
+
+      </footer>
+
+      
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+
+
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        
+
+<nav class="page__footer-links">
+  <div class="page__footer-links-block">
+    <ul>
+      <li>&copy; 2022 MockLab</li>
+      <li><a href="mailto:info@mocklab.io">info@mocklab.io</a></li>
+    </ul>
+  </div>
+
+  <div class="page__footer-links-block">
+    <h3>Help</h3>
+    <ul>
+      <li><a href="/docs/getting-started/">Docs</a></li>
+      <li><a href="/docs/getting-started/">Blog</a></li>
+      <li><a href="https://get.mocklab.io/pricing">Pricing</a></li>
+    </ul>
+  </div>
+
+  <div class="page__footer-links-block">
+    <h3>Solutions</h3>
+    <ul>
+      <li><a href="/oauth2/">OAuth2</a></li>
+    </ul>
+  </div>
+
+  <div class="page__footer-links-block">
+    <h3>Policies</h3>
+    <ul>
+      <li><a href="/docs/terms-and-conditions/">Terms and conditions</a></li>
+      <li><a href="/docs/privacy-policy/">Privacy policy</a></li>
+    </ul>
+  </div>
+
+  <div class="page__footer-links-block">
+    <ul>
+
+    </ul>
+  </div>
+</nav>
+
+
+
+      </footer>
+    </div>
+
+    <script src="https://www.mocklab.io/assets/js/main.min.js"></script>
+
+
+
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-78148205-6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-78148205-6');
+  gtag('config', 'AW-10998354290');
+</script>
+
+
+
+
+
+<script>
+    window.intercomSettings = {
+        app_id: "xjme6u4w"
+    };
+</script>
+<script>(function(){var w=window;var ic=w.Intercom;if(typeof ic==="function"){ic('reattach_activator');ic('update',intercomSettings);}else{var d=document;var i=function(){i.c(arguments)};i.q=[];i.c=function(args){i.q.push(args)};w.Intercom=i;function l(){var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://widget.intercom.io/widget/xjme6u4w';var x=d.getElementsByTagName('script')[0];x.parentNode.insertBefore(s,x);}if(w.attachEvent){w.attachEvent('onload',l);}else{w.addEventListener('load',l,false);}}})()</script>
+
+
+  </body>
+</html>
+
