@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.2">Jekyll</generator><link href="https://www.mocklab.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://www.mocklab.io/" rel="alternate" type="text/html" /><updated>2022-12-03T16:39:34+00:00</updated><id>https://www.mocklab.io/feed.xml</id><title type="html">MockLab</title><subtitle>MockLab is the hosted API mocking tool built on WireMock</subtitle><author><name>Your Name</name></author><entry><title type="html">Postman Mock Server vs. MockLab</title><link href="https://www.mocklab.io/blog/postman-mock-server-vs-mocklab/" rel="alternate" type="text/html" title="Postman Mock Server vs. MockLab" /><published>2021-03-24T00:00:00+00:00</published><updated>2021-03-24T00:00:00+00:00</updated><id>https://www.mocklab.io/blog/postman-mock-server-vs-mocklab</id><content type="html" xml:base="https://www.mocklab.io/blog/postman-mock-server-vs-mocklab/"><![CDATA[<p>Postman is indisputably the dominant HTTP testing tool on the market today, and
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.2">Jekyll</generator><link href="https://docs.wiremock.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://docs.wiremock.io/" rel="alternate" type="text/html" /><updated>2022-12-05T10:01:16+00:00</updated><id>https://docs.wiremock.io/feed.xml</id><title type="html">MockLab</title><subtitle>MockLab is the hosted API mocking tool built on WireMock</subtitle><author><name>Your Name</name></author><entry><title type="html">Postman Mock Server vs. MockLab</title><link href="https://docs.wiremock.io/blog/postman-mock-server-vs-mocklab/" rel="alternate" type="text/html" title="Postman Mock Server vs. MockLab" /><published>2021-03-24T00:00:00+00:00</published><updated>2021-03-24T00:00:00+00:00</updated><id>https://docs.wiremock.io/blog/postman-mock-server-vs-mocklab</id><content type="html" xml:base="https://docs.wiremock.io/blog/postman-mock-server-vs-mocklab/"><![CDATA[<p>Postman is indisputably the dominant HTTP testing tool on the market today, and
 if you’re involved in developing or testing APIs it’s highly likely you’ve used it
 (or know someone who does at least).</p>
 
@@ -249,7 +249,7 @@ are generated from schemas.</p>
   <span class="na">x-faker</span><span class="pi">:</span> <span class="s">name.first_name</span>
 </code></pre></div></div>
 
-<p>See the <a href="https://www.mocklab.io/docs/swagger/#customising-the-import" target="_blank">Swagger documentation</a>
+<p>See the <a href="https://docs.wiremock.io/docs/swagger/#customising-the-import" target="_blank">Swagger documentation</a>
 for details on using extended attributes.</p>
 
 <h2 id="dynamic-responses">Dynamic responses</h2>
@@ -355,7 +355,7 @@ straightforward solution that’s tightly integrated with your existing setup.</
 <p>MockLab may be the best choice if you need fine control over how requests are matched,
 advanced response templating, recording, proxying, a comprehensive API or support for performance testing.</p>
 
-<p>And remember, you can <a href="https://www.mocklab.io/docs/import-export/postman/" target="_blank">import your Postman collections</a> into MockLab to get started.</p>
+<p>And remember, you can <a href="https://docs.wiremock.io/docs/import-export/postman/" target="_blank">import your Postman collections</a> into MockLab to get started.</p>
 
 <div class="mid-article-cta">
   <p class="mid-article-cta__text">
@@ -366,10 +366,10 @@ advanced response templating, recording, proxying, a comprehensive API or suppor
     It's quick, simple and free to get started, and it has the flexibility to grow with your project's testing demands.
   </p>
 
-  <a class="mid-article-cta__learn-more" href="https://get.mocklab.io/?utm_source=www.mocklab.io&amp;utm_medium=blog&amp;utm_campaign=postman-vs-mocklab-learn-more-cta" title="Learn more">Learn more</a>
+  <a class="mid-article-cta__learn-more" href="https://get.mocklab.io/?utm_source=docs.wiremock.io&amp;utm_medium=blog&amp;utm_campaign=postman-vs-mocklab-learn-more-cta" title="Learn more">Learn more</a>
 
-  <a class="mid-article-cta__get-started" href="https://app.mocklab.io/login?for=signup&amp;utm_source=www.mocklab.io&amp;utm_medium=blog&amp;utm_campaign=postman-vs-mocklab-get-started-cta" title="Get started for free" target="_blank">Get started for free</a>
-</div>]]></content><author><name>Tom Akehurst</name></author><category term="Postman" /><category term="MockLab" /><category term="API Mocking" /><summary type="html"><![CDATA[A comparison of Postman mock servers and MockLab for building mock APIs.]]></summary></entry><entry><title type="html">Which Java HTTP client should I use in 2020?</title><link href="https://www.mocklab.io/blog/which-java-http-client-should-i-use-in-2020/" rel="alternate" type="text/html" title="Which Java HTTP client should I use in 2020?" /><published>2020-10-12T00:00:00+01:00</published><updated>2020-10-12T00:00:00+01:00</updated><id>https://www.mocklab.io/blog/which-java-http-client-should-i-use-in-2020</id><content type="html" xml:base="https://www.mocklab.io/blog/which-java-http-client-should-i-use-in-2020/"><![CDATA[<p>HTTP has become the dominant protocol for integration of networked programs, and consequently many (possibly most) Java projects need to be able to make HTTP calls to other systems.</p>
+  <a class="mid-article-cta__get-started" href="https://app.mocklab.io/login?for=signup&amp;utm_source=docs.wiremock.io&amp;utm_medium=blog&amp;utm_campaign=postman-vs-mocklab-get-started-cta" title="Get started for free" target="_blank">Get started for free</a>
+</div>]]></content><author><name>Tom Akehurst</name></author><category term="Postman" /><category term="MockLab" /><category term="API Mocking" /><summary type="html"><![CDATA[A comparison of Postman mock servers and MockLab for building mock APIs.]]></summary></entry><entry><title type="html">Which Java HTTP client should I use in 2020?</title><link href="https://docs.wiremock.io/blog/which-java-http-client-should-i-use-in-2020/" rel="alternate" type="text/html" title="Which Java HTTP client should I use in 2020?" /><published>2020-10-12T00:00:00+01:00</published><updated>2020-10-12T00:00:00+01:00</updated><id>https://docs.wiremock.io/blog/which-java-http-client-should-i-use-in-2020</id><content type="html" xml:base="https://docs.wiremock.io/blog/which-java-http-client-should-i-use-in-2020/"><![CDATA[<p>HTTP has become the dominant protocol for integration of networked programs, and consequently many (possibly most) Java projects need to be able to make HTTP calls to other systems.</p>
 
 <p>As with many things in the Java ecosystem, a broad array of alternatives exist for achieving this, both via core libraries and open source.</p>
 
@@ -478,9 +478,9 @@ Support for the <a href="https://en.wikipedia.org/wiki/WebSocket" target="_blank
     has the flexibility to grow with your project's testing demands.
   </p>
 
-  <a class="mid-article-cta__learn-more" href="https://get.mocklab.io/?utm_source=www.mocklab.io&amp;utm_medium=blog&amp;utm_campaign=java-http-clients-learn-more-cta" title="Learn more" target="_blank">Learn more</a>
+  <a class="mid-article-cta__learn-more" href="https://get.mocklab.io/?utm_source=docs.wiremock.io&amp;utm_medium=blog&amp;utm_campaign=java-http-clients-learn-more-cta" title="Learn more" target="_blank">Learn more</a>
 
-  <a class="mid-article-cta__get-started" href="https://app.mocklab.io/login?for=signup&amp;utm_source=www.mocklab.io&amp;utm_medium=blog&amp;utm_campaign=java-http-clients-get-started-cta" title="Get started for free" target="_blank">Get started for free</a>
+  <a class="mid-article-cta__get-started" href="https://app.mocklab.io/login?for=signup&amp;utm_source=docs.wiremock.io&amp;utm_medium=blog&amp;utm_campaign=java-http-clients-get-started-cta" title="Get started for free" target="_blank">Get started for free</a>
 </div>
 
 <h2 id="the-clients">The clients</h2>
@@ -786,7 +786,7 @@ Support for the <a href="https://en.wikipedia.org/wiki/WebSocket" target="_blank
 teams quickly simulate their external API dependencies so that they can ship faster and test more
 thoroughly.</p>
 
-<p>For more information, visit <a href="https://get.mocklab.io?utm_source=www.mocklab.io&amp;utm_medium=blog&amp;utm_campaign=http_clients_article-bottom_cta">https://get.mocklab.io</a>.</p>]]></content><author><name>Tom Akehurst</name></author><category term="Java" /><category term="HTTP" /><summary type="html"><![CDATA[A comparison of all the major Java HTTP clients]]></summary></entry><entry><title type="html">MockLab Now Supports Swagger and Swaggerhub</title><link href="https://www.mocklab.io/blog/mocklab-now-supports-swagger-and-swaggerhub/" rel="alternate" type="text/html" title="MockLab Now Supports Swagger and Swaggerhub" /><published>2018-08-03T00:00:00+01:00</published><updated>2018-08-03T00:00:00+01:00</updated><id>https://www.mocklab.io/blog/mocklab-now-supports-swagger-and-swaggerhub</id><content type="html" xml:base="https://www.mocklab.io/blog/mocklab-now-supports-swagger-and-swaggerhub/"><![CDATA[<p><img src="/images/screenshots/swagger-logo2.png" alt="Swagger logo" style="border:none" /></p>
+<p>For more information, visit <a href="https://get.mocklab.io?utm_source=docs.wiremock.io&amp;utm_medium=blog&amp;utm_campaign=http_clients_article-bottom_cta">https://get.mocklab.io</a>.</p>]]></content><author><name>Tom Akehurst</name></author><category term="Java" /><category term="HTTP" /><summary type="html"><![CDATA[A comparison of all the major Java HTTP clients]]></summary></entry><entry><title type="html">MockLab Now Supports Swagger and Swaggerhub</title><link href="https://docs.wiremock.io/blog/mocklab-now-supports-swagger-and-swaggerhub/" rel="alternate" type="text/html" title="MockLab Now Supports Swagger and Swaggerhub" /><published>2018-08-03T00:00:00+01:00</published><updated>2018-08-03T00:00:00+01:00</updated><id>https://docs.wiremock.io/blog/mocklab-now-supports-swagger-and-swaggerhub</id><content type="html" xml:base="https://docs.wiremock.io/blog/mocklab-now-supports-swagger-and-swaggerhub/"><![CDATA[<p><img src="/images/screenshots/swagger-logo2.png" alt="Swagger logo" style="border:none" /></p>
 
 <p><a href="https://swagger.io/" target="_blank">Swagger</a> (or the OpenAPI Specification as it’s now known) has become the de-facto standard
 way to specify, document and test REST-like APIs.</p>
@@ -841,10 +841,10 @@ a receiver - just create a new webhook in the Integrations menu (<img src="/imag
     has the flexibility to grow with your project's testing demands.
   </p>
 
-  <a class="mid-article-cta__learn-more" href="https://get.mocklab.io/?utm_source=www.mocklab.io&amp;utm_medium=blog&amp;utm_campaign=swagger-and-swaggerhub-learn-more-cta" title="Learn more" target="_blank">Learn more</a>
+  <a class="mid-article-cta__learn-more" href="https://get.mocklab.io/?utm_source=docs.wiremock.io&amp;utm_medium=blog&amp;utm_campaign=swagger-and-swaggerhub-learn-more-cta" title="Learn more" target="_blank">Learn more</a>
 
-  <a class="mid-article-cta__get-started" href="https://app.mocklab.io/login?for=signup&amp;utm_source=www.mocklab.io&amp;utm_medium=blog&amp;utm_campaign=swagger-and-swaggerhub-get-started-cta" title="Get started for free" target="_blank">Get started for free</a>
-</div>]]></content><author><name>Tom Akehurst</name></author><category term="MockLab" /><category term="API Mocking" /><category term="Open API Specification" /><category term="Swagger" /><category term="Swaggerhub" /><summary type="html"><![CDATA[MockLab now supports import of Swagger documents and integration with Swaggerhub]]></summary></entry><entry><title type="html">Build a Paypal Sandbox for Load Testing in 10 Minutes</title><link href="https://www.mocklab.io/blog/build-a-paypal-sandbox-for-load-testing/" rel="alternate" type="text/html" title="Build a Paypal Sandbox for Load Testing in 10 Minutes" /><published>2018-07-10T00:00:00+01:00</published><updated>2018-07-10T00:00:00+01:00</updated><id>https://www.mocklab.io/blog/build-a-paypal-sandbox-for-load-testing</id><content type="html" xml:base="https://www.mocklab.io/blog/build-a-paypal-sandbox-for-load-testing/"><![CDATA[<div class="video">
+  <a class="mid-article-cta__get-started" href="https://app.mocklab.io/login?for=signup&amp;utm_source=docs.wiremock.io&amp;utm_medium=blog&amp;utm_campaign=swagger-and-swaggerhub-get-started-cta" title="Get started for free" target="_blank">Get started for free</a>
+</div>]]></content><author><name>Tom Akehurst</name></author><category term="MockLab" /><category term="API Mocking" /><category term="Open API Specification" /><category term="Swagger" /><category term="Swaggerhub" /><summary type="html"><![CDATA[MockLab now supports import of Swagger documents and integration with Swaggerhub]]></summary></entry><entry><title type="html">Build a Paypal Sandbox for Load Testing in 10 Minutes</title><link href="https://docs.wiremock.io/blog/build-a-paypal-sandbox-for-load-testing/" rel="alternate" type="text/html" title="Build a Paypal Sandbox for Load Testing in 10 Minutes" /><published>2018-07-10T00:00:00+01:00</published><updated>2018-07-10T00:00:00+01:00</updated><id>https://docs.wiremock.io/blog/build-a-paypal-sandbox-for-load-testing</id><content type="html" xml:base="https://docs.wiremock.io/blog/build-a-paypal-sandbox-for-load-testing/"><![CDATA[<div class="video">
 <script src="https://fast.wistia.com/embed/medias/tz7u9ot0sj.jsonp" async=""></script><script src="https://fast.wistia.com/assets/external/E-v1.js" async=""></script><div class="wistia_responsive_padding" style="padding:56.25% 0 0 0;position:relative;"><div class="wistia_responsive_wrapper" style="height:100%;left:0;position:absolute;top:0;width:100%;"><div class="wistia_embed wistia_async_tz7u9ot0sj videoFoam=true" style="height:100%;position:relative;width:100%"><div class="wistia_swatch" style="height:100%;left:0;opacity:0;overflow:hidden;position:absolute;top:0;transition:opacity 200ms;width:100%;"><img src="https://fast.wistia.com/embed/medias/tz7u9ot0sj/swatch" style="filter:blur(5px);height:100%;object-fit:contain;width:100%;" alt="" onload="this.parentNode.style.opacity=1;" /></div></div></div></div>
 </div>
 
@@ -1022,7 +1022,7 @@ apache-jmeter-4.0/bin/jmeter
     has the flexibility to grow with your project's testing demands.
   </p>
 
-  <a class="mid-article-cta__learn-more" href="https://get.mocklab.io/?utm_source=www.mocklab.io&amp;utm_medium=blog&amp;utm_campaign=paypal-in-10-minutes-learn-more-cta" title="Learn more" target="_blank">Learn more</a>
+  <a class="mid-article-cta__learn-more" href="https://get.mocklab.io/?utm_source=docs.wiremock.io&amp;utm_medium=blog&amp;utm_campaign=paypal-in-10-minutes-learn-more-cta" title="Learn more" target="_blank">Learn more</a>
 
-  <a class="mid-article-cta__get-started" href="https://app.mocklab.io/login?for=signup&amp;utm_source=www.mocklab.io&amp;utm_medium=blog&amp;utm_campaign=paypal-in-10-minutes-get-started-cta" title="Get started for free" target="_blank">Get started for free</a>
+  <a class="mid-article-cta__get-started" href="https://app.mocklab.io/login?for=signup&amp;utm_source=docs.wiremock.io&amp;utm_medium=blog&amp;utm_campaign=paypal-in-10-minutes-get-started-cta" title="Get started for free" target="_blank">Get started for free</a>
 </div>]]></content><author><name>Tom Akehurst</name></author><category term="MockLab" /><category term="API Mocking" /><category term="Performance Testing" /><category term="Paypal" /><summary type="html"><![CDATA[Build a mock of the Paypal API to allow end to end load testing of your e-commerce app]]></summary></entry></feed>
