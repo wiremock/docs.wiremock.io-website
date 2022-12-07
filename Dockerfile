@@ -1,8 +1,11 @@
-FROM ruby:2.7.2-alpine3.13
+FROM ubuntu:jammy
 
-RUN apk add bash curl
+LABEL maintainer="Tom Akehurst <tom@wiremock.org>"
 
-RUN adduser -h /home/jekyll -s /usr/bin/bash -D jekyll jekyll && chmod a+wx /usr/bin && chmod a+wx /bin
+RUN apt-get update -y && apt-get install -y git curl rbenv ruby-build
+
+RUN groupadd -r jekyll && useradd -r -m -g jekyll -s /usr/bin/bash jekyll \
+  && chmod a+wx /usr/bin && chmod -R a+rwx /var && chmod -R a+rw /usr/local/bin && chmod -R a+rw /bin && chmod -R a+rwx /var/cache
 
 USER jekyll
 
@@ -23,9 +26,11 @@ ENV PATH "/home/jekyll/.nvm/versions/node/v$NODE_VERSION/bin:$PATH"
 COPY init.sh /init.sh
 COPY entrypoint.sh /entrypoint.sh
 
-# RUN /init.sh
+RUN rbenv init
+RUN rbenv exec gem install bundler
 
 WORKDIR /sources
+RUN /init.sh
 
 EXPOSE 4000
 

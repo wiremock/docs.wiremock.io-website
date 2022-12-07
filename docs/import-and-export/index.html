@@ -20,7 +20,7 @@
 
 
 
-<title>Import &amp; Export - Overview | MockLab</title>
+<title>Import &amp; Export - Overview | WireMock Cloud</title>
 
 
 
@@ -28,10 +28,10 @@
 
 
 
-<meta name="description" content="Importing and exporting mock API stubs in Swagger, OpenAPI and MockLab/WireMock format.">
+<meta name="description" content="Importing and exporting mock API stubs in Swagger, OpenAPI and WireMock Cloud/WireMock format.">
 
 <meta property="og:locale" content="en-US">
-<meta property="og:site_name" content="MockLab">
+<meta property="og:site_name" content="WireMock Cloud">
 <meta property="og:title" content="Import &amp; Export - Overview">
 
 
@@ -40,7 +40,7 @@
 
 
 
-  <meta property="og:description" content="Importing and exporting mock API stubs in Swagger, OpenAPI and MockLab/WireMock format.">
+  <meta property="og:description" content="Importing and exporting mock API stubs in Swagger, OpenAPI and WireMock Cloud/WireMock format.">
 
 
 
@@ -61,7 +61,7 @@
 
 
   <meta property="og:type" content="article">
-  <meta property="article:published_time" content="2022-12-06T17:14:23+00:00">
+  <meta property="article:published_time" content="2022-12-07T18:08:01+00:00">
   
     <link rel="next" href="https://docs.wiremock.io/docs/import-export/api/" title="Import &amp; Export - Via the API">
   
@@ -100,7 +100,7 @@
 <!-- end SEO -->
 
 
-<link href="https://docs.wiremock.io/feed.xml" type="application/atom+xml" rel="alternate" title="MockLab Feed">
+<link href="https://docs.wiremock.io/feed.xml" type="application/atom+xml" rel="alternate" title="WireMock Cloud Feed">
 
 <!-- http://t.co/dKP3o1e -->
 <meta name="HandheldFriendly" content="True">
@@ -118,7 +118,7 @@
 
 <meta http-equiv="cleartype" content="on">
 
-<link rel="shortcut icon" type="image/x-icon" href="https://docs.wiremock.io/images/favicon.png">
+<link rel="shortcut icon" type="image/x-icon" href="https://docs.wiremock.io/images/favicon.svg">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.js@1/dist/instantsearch.min.css" />
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.0/dist/instantsearch-theme-algolia.min.css">
@@ -130,6 +130,7 @@
         y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
     })(window, document, "clarity", "script", "5oa515rnev");
 </script>
+<link href="https://fonts.googleapis.com/css?family=DM+Sans" rel="stylesheet">
 
   </head>
 
@@ -139,32 +140,30 @@
 <![endif]-->
     
 
-<nav class="header-nav sticky">
+<nav class="header-nav">
   <ul class="header-nav__container">
     <li class="header-nav__logo">
         <a href="https://get.mocklab.io">
-            <img src="/images/mocklab_logo_with_text.png" title="MockLab logo" alt="MockLab logo"/>
+            <img src="/images/wiremock_cloud_logo.svg" title="WireMock Cloud logo" alt="WireMock Cloud logo"/>
         </a>
     </li>
 
     <li class="header-nav__item">
         <a href="/docs/getting-started/" title="Docs">Docs</a>
     </li>
+    
     <li class="header-nav__item">
-        <a href="/blog/" title="Docs">Blog</a>
+        <a href="https://www.wiremock.io/pricing" title="Docs">Pricing</a>
     </li>
-    <li class="header-nav__item">
-        <a href="https://get.mocklab.io/pricing" title="Docs">Pricing</a>
-    </li>
-    <li class="header-nav__item header-nav__item--last">
-        <a href="https://app.mocklab.io" title="Login" target="_blank">Login</a>
+    
+    <li class="header-nav__cta">
+        <a href="https://app.wiremock.cloud/login" title="Sign up" target="_blank">Start mocking for free</a>
     </li>
 
-    <li class="header-nav__cta">
-        <a href="https://app.mocklab.io/login?for=signup" title="Sign up" target="_blank">Sign up</a>
+    <li class="header-nav__cta header-nav__cta--secondary">
+        <a href="https://app.wiremock.cloud/login" title="Login" target="_blank">Login</a>
     </li>
   </ul>
-
 </nav>
 
     
@@ -187,16 +186,6 @@
 
                 
                 Getting Started
-                </a>
-              </li>
-            
-              
-              
-              <li>
-                <a href="https://docs.wiremock.io/docs/teams-and-collaboration/">
-
-                
-                Teams and Collaboration
                 </a>
               </li>
             
@@ -613,33 +602,6 @@
           </ul>
         </li>
       
-        <li class="doc-category">
-          <span class="doc-category__title">Policies</span>
-          <ul class="doc-category__links">
-            
-              
-              
-              <li>
-                <a href="https://docs.wiremock.io/docs/terms-and-conditions/">
-
-                
-                MockLab Terms of Service
-                </a>
-              </li>
-            
-              
-              
-              <li>
-                <a href="https://docs.wiremock.io/docs/privacy-policy/">
-
-                
-                Privacy Policy
-                </a>
-              </li>
-            
-          </ul>
-        </li>
-      
     </ul>
 
   </nav>
@@ -648,8 +610,8 @@
 
   <article class="doc-page" itemscope itemtype="http://schema.org/CreativeWork">
     <meta itemprop="headline" content="Import &amp; Export - Overview">
-    <meta itemprop="description" content="You can import your and Swagger and OpenAPI specifications and Postman collections into MockLab in orderto auto-generate stubs in your mock API. Swagger 2.x and OpenAPI 3.x are supported,in both JSON and YAML format.">
-    <meta itemprop="datePublished" content="December 06, 2022">
+    <meta itemprop="description" content="You can import your and Swagger and OpenAPI specifications and Postman collections into WireMock Cloud in orderto auto-generate stubs in your mock API. Swagger 2.x and OpenAPI 3.x are supported,in both JSON and YAML format.">
+    <meta itemprop="datePublished" content="December 07, 2022">
     
 
     <div class="page__inner-wrap">
@@ -658,13 +620,13 @@
 </h1>
       </header>
       <section class="page__content" itemprop="text">
-        <p>You can import your and <a href="/docs/swagger/">Swagger</a> and <a href="/docs/swagger/">OpenAPI</a> specifications and <a href="/docs/import-export/postman">Postman</a> collections into MockLab in order
+        <p>You can import your and <a href="/docs/swagger/">Swagger</a> and <a href="/docs/swagger/">OpenAPI</a> specifications and <a href="/docs/import-export/postman">Postman</a> collections into WireMock Cloud in order
 to auto-generate stubs in your mock API. Swagger 2.x and OpenAPI 3.x are supported,
 in both JSON and YAML format.</p>
 
 <p>You can also import and export stubs in <a href="/docs/import-export/wiremock/">WireMock</a> JSON format. This can be used
-to move projects between WireMock and MockLab, store your mock APIs in source control
-and make copies of MockLab APIs.</p>
+to move projects between WireMock and WireMock Cloud, store your mock APIs in source control
+and make copies of WireMock Cloud APIs.</p>
 
 <h2 id="importing---basics">Importing - basics</h2>
 
@@ -681,17 +643,17 @@ mock API you’d like to import into, then click the Import button.</p>
 
 <p><img alt="Import file" src="/images/screenshots/import-file.png" style="width: 80%" /></p>
 
-<p>The WireMock JSON format is also MockLab’s native format, so when a file of this type is imported
+<p>The WireMock JSON format is also WireMock Cloud’s native format, so when a file of this type is imported
 it the stubs created correspond exactly to the file contents.</p>
 
 <p>However, when importing from Swagger and OpenAPI stubs are generated according to
 a set of conversion rules. These can be <a href="/docs/swagger/#customising-the-import">tweaked and customised in a number of ways</a>.</p>
 
-<p>You can also automate imports via <a href="/docs/import-export/api">MockLab’s API</a>.</p>
+<p>You can also automate imports via <a href="/docs/import-export/api">WireMock Cloud’s API</a>.</p>
 
 <h2 id="exporting">Exporting</h2>
 
-<p>To export the current mock API’s stubs in MockLab/WireMock JSON format, click the Export button:</p>
+<p>To export the current mock API’s stubs in WireMock Cloud/WireMock JSON format, click the Export button:</p>
 
 <p><img alt="Export button" src="/images/screenshots/export-button-on-toolbar.png" style="width: 80%;border:none;" /></p>
 
@@ -729,20 +691,17 @@ a set of conversion rules. These can be <a href="/docs/swagger/#customising-the-
 <!-- end custom footer snippets -->
         
 
-<nav class="page__footer-links">
-  <div class="page__footer-links-block">
-    <ul>
-      <li>&copy; 2022 MockLab</li>
-      <li><a href="mailto:info@mocklab.io">info@mocklab.io</a></li>
-    </ul>
-  </div>
+<div class="page__footer-logo">
+  <img src="https://wiremock.org/images/wireMockLogo.png" style="width: 160px; height: 20px">
+  <p>&copy; 2022 WireMock Cloud</p>
+</div>
 
+<nav class="page__footer-links">
   <div class="page__footer-links-block">
     <h3>Help</h3>
     <ul>
       <li><a href="/docs/getting-started/">Docs</a></li>
-      <li><a href="/docs/getting-started/">Blog</a></li>
-      <li><a href="https://get.mocklab.io/pricing">Pricing</a></li>
+      <li><a href="https://wiremock.io/pricing">Pricing</a></li>
     </ul>
   </div>
 
@@ -752,24 +711,7 @@ a set of conversion rules. These can be <a href="/docs/swagger/#customising-the-
       <li><a href="/oauth2/">OAuth2</a></li>
     </ul>
   </div>
-
-  <div class="page__footer-links-block">
-    <h3>Policies</h3>
-    <ul>
-      <li><a href="/docs/terms-and-conditions/">Terms and conditions</a></li>
-      <li><a href="/docs/privacy-policy/">Privacy policy</a></li>
-    </ul>
-  </div>
-
-  <div class="page__footer-links-block">
-    <ul>
-
-    </ul>
-  </div>
 </nav>
-
-
-
       </footer>
     </div>
 

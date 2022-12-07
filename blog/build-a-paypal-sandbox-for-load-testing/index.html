@@ -20,7 +20,7 @@
 
 
 
-<title>Build a Paypal Sandbox for Load Testing in 10 Minutes | MockLab</title>
+<title>Build a Paypal Sandbox for Load Testing in 10 Minutes | WireMock Cloud</title>
 
 
 
@@ -31,7 +31,7 @@
 <meta name="description" content="Build a mock of the Paypal API to allow end to end load testing of your e-commerce app">
 
 <meta property="og:locale" content="en-US">
-<meta property="og:site_name" content="MockLab">
+<meta property="og:site_name" content="WireMock Cloud">
 <meta property="og:title" content="Build a Paypal Sandbox for Load Testing in 10 Minutes">
 
 
@@ -44,7 +44,7 @@
 
 
 
-  <meta property="keywords" content="MockLab,API Mocking,Performance Testing,Paypal">
+  <meta property="keywords" content="WireMock Cloud,API Mocking,Performance Testing,Paypal">
 
 
 
@@ -63,7 +63,7 @@
   <meta property="og:type" content="article">
   <meta property="article:published_time" content="2018-07-10T00:00:00+01:00">
   
-    <link rel="next" href="https://docs.wiremock.io/blog/mocklab-now-supports-swagger-and-swaggerhub/" title="MockLab Now Supports Swagger and Swaggerhub">
+    <link rel="next" href="https://docs.wiremock.io/blog/mocklab-now-supports-swagger-and-swaggerhub/" title="WireMock Cloud Now Supports Swagger and Swaggerhub">
   
   
 
@@ -98,7 +98,7 @@
 <!-- end SEO -->
 
 
-<link href="https://docs.wiremock.io/feed.xml" type="application/atom+xml" rel="alternate" title="MockLab Feed">
+<link href="https://docs.wiremock.io/feed.xml" type="application/atom+xml" rel="alternate" title="WireMock Cloud Feed">
 
 <!-- http://t.co/dKP3o1e -->
 <meta name="HandheldFriendly" content="True">
@@ -116,7 +116,7 @@
 
 <meta http-equiv="cleartype" content="on">
 
-<link rel="shortcut icon" type="image/x-icon" href="https://docs.wiremock.io/images/favicon.png">
+<link rel="shortcut icon" type="image/x-icon" href="https://docs.wiremock.io/images/favicon.svg">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.js@1/dist/instantsearch.min.css" />
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.0/dist/instantsearch-theme-algolia.min.css">
@@ -128,6 +128,7 @@
         y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
     })(window, document, "clarity", "script", "5oa515rnev");
 </script>
+<link href="https://fonts.googleapis.com/css?family=DM+Sans" rel="stylesheet">
 
   </head>
 
@@ -137,32 +138,30 @@
 <![endif]-->
     
 
-<nav class="header-nav sticky">
+<nav class="header-nav">
   <ul class="header-nav__container">
     <li class="header-nav__logo">
         <a href="https://get.mocklab.io">
-            <img src="/images/mocklab_logo_with_text.png" title="MockLab logo" alt="MockLab logo"/>
+            <img src="/images/wiremock_cloud_logo.svg" title="WireMock Cloud logo" alt="WireMock Cloud logo"/>
         </a>
     </li>
 
     <li class="header-nav__item">
         <a href="/docs/getting-started/" title="Docs">Docs</a>
     </li>
+    
     <li class="header-nav__item">
-        <a href="/blog/" title="Docs">Blog</a>
+        <a href="https://www.wiremock.io/pricing" title="Docs">Pricing</a>
     </li>
-    <li class="header-nav__item">
-        <a href="https://get.mocklab.io/pricing" title="Docs">Pricing</a>
-    </li>
-    <li class="header-nav__item header-nav__item--last">
-        <a href="https://app.mocklab.io" title="Login" target="_blank">Login</a>
+    
+    <li class="header-nav__cta">
+        <a href="https://app.wiremock.cloud/login" title="Sign up" target="_blank">Start mocking for free</a>
     </li>
 
-    <li class="header-nav__cta">
-        <a href="https://app.mocklab.io/login?for=signup" title="Sign up" target="_blank">Sign up</a>
+    <li class="header-nav__cta header-nav__cta--secondary">
+        <a href="https://app.wiremock.cloud/login" title="Login" target="_blank">Login</a>
     </li>
   </ul>
-
 </nav>
 
     
@@ -228,18 +227,18 @@
     
       
       
-      <!-- <a href="https://docs.wiremock.io/categories/#mocklab" class="page__taxonomy-item" rel="tag">MockLab</a><span class="sep">, </span> -->
-      <span class="page__taxonomy-item">MockLab<span class="sep">, </span></span>
-    
-      
-      
       <!-- <a href="https://docs.wiremock.io/categories/#paypal" class="page__taxonomy-item" rel="tag">Paypal</a><span class="sep">, </span> -->
       <span class="page__taxonomy-item">Paypal<span class="sep">, </span></span>
     
       
       
-      <!-- <a href="https://docs.wiremock.io/categories/#performance-testing" class="page__taxonomy-item" rel="tag">Performance Testing</a> -->
-      <span class="page__taxonomy-item">Performance Testing</span>
+      <!-- <a href="https://docs.wiremock.io/categories/#performance-testing" class="page__taxonomy-item" rel="tag">Performance Testing</a><span class="sep">, </span> -->
+      <span class="page__taxonomy-item">Performance Testing<span class="sep">, </span></span>
+    
+      
+      
+      <!-- <a href="https://docs.wiremock.io/categories/#wiremock-cloud" class="page__taxonomy-item" rel="tag">WireMock Cloud</a> -->
+      <span class="page__taxonomy-item">WireMock Cloud</span>
     
     </span>
   </p>
@@ -270,12 +269,12 @@ used in production won’t be tested.</p>
 
 <p>A better solution is to build a simulation of the Paypal API and connect your test environment to it.</p>
 
-<p>MockLab is a tool specifically built for this purpose, and the rest of this article will focus on how you can use it to quickly construct a mock Paypal API
+<p>WireMock Cloud is a tool specifically built for this purpose, and the rest of this article will focus on how you can use it to quickly construct a mock Paypal API
 suitable for performance testing.</p>
 
 <h2 id="setup">Setup</h2>
 
-<p>To begin, you need to have logged into MockLab and created a new, empty mock API. You can <a href="https://app.mocklab.io/login?for=signup" target="_blank">sign up here</a> if you haven’t already.</p>
+<p>To begin, you need to have logged into WireMock Cloud and created a new, empty mock API. You can <a href="https://app.mocklab.io/login?for=signup" target="_blank">sign up here</a> if you haven’t already.</p>
 
 <p>Once you’ve created a new mock API, grab a copy of its base URL. You can find this in the title bar:</p>
 
@@ -307,7 +306,7 @@ gradlew bootRun
 
 <h2 id="recording-initial-stubs">Recording initial stubs</h2>
 
-<p>In MockLab, hit the Record button, set the target URL as Paypal’s sandbox then start recording:</p>
+<p>In WireMock Cloud, hit the Record button, set the target URL as Paypal’s sandbox then start recording:</p>
 
 <p><img src="/images/screenshots/paypal-article/recorder.png" alt="Stub recorder" style="width: 70%; border: none" /></p>
 
@@ -315,7 +314,7 @@ gradlew bootRun
 
 <p><img src="/images/screenshots/paypal-article/paypal-demo-app.png" alt="Paypal demo app" style="width: 70%; border: none" /></p>
 
-<p>Return to MockLab and stop recording. You should now see two stubs have been appeared in the list, one for the prepare payment step and one for execute payment.</p>
+<p>Return to WireMock Cloud and stop recording. You should now see two stubs have been appeared in the list, one for the prepare payment step and one for execute payment.</p>
 
 <p>If you wish you can test these with the internal request maker or an HTTP client like Postman:</p>
 
@@ -330,7 +329,7 @@ means they’ll only work for the exact same payment ID and amount.</p>
 meaning IDs and dates you’d expect to be unique between requests will be the same. This causes problems if, for instance, the payment ID is saved
 in a unique field by your app.</p>
 
-<p>All of these issues can be resolved using MockLab’s advanced matching and templated responses.</p>
+<p>All of these issues can be resolved using WireMock Cloud’s advanced matching and templated responses.</p>
 
 <h3 id="create-payment">Create payment</h3>
 
@@ -392,7 +391,7 @@ you can add some artificial delay to your stubs:</p>
 <h2 id="validating-your-stubs">Validating your stubs</h2>
 
 <p>You may wish to quickly test your updated stubs before pressing them into service. Again, you can do this with a tool like Postman, or
-with MockLab’s own test request maker:</p>
+with WireMock Cloud’s own test request maker:</p>
 
 <p><img src="/images/screenshots/paypal-article/test-requester.png" alt="Test requester" /></p>
 
@@ -421,7 +420,7 @@ apache-jmeter-4.0/bin/jmeter
 <div class="mid-article-cta">
   <p class="mid-article-cta__text">
     If you've made it this far there's a good chance you're building a system that
-    relies on 3rd party APIs. MockLab can help you test your system when those
+    relies on 3rd party APIs. WireMock Cloud can help you test your system when those
     APIs don't exist yet, have flakey test environments or are expensive to call.
   </p>
 
@@ -461,20 +460,17 @@ apache-jmeter-4.0/bin/jmeter
 <!-- end custom footer snippets -->
         
 
-<nav class="page__footer-links">
-  <div class="page__footer-links-block">
-    <ul>
-      <li>&copy; 2022 MockLab</li>
-      <li><a href="mailto:info@mocklab.io">info@mocklab.io</a></li>
-    </ul>
-  </div>
+<div class="page__footer-logo">
+  <img src="https://wiremock.org/images/wireMockLogo.png" style="width: 160px; height: 20px">
+  <p>&copy; 2022 WireMock Cloud</p>
+</div>
 
+<nav class="page__footer-links">
   <div class="page__footer-links-block">
     <h3>Help</h3>
     <ul>
       <li><a href="/docs/getting-started/">Docs</a></li>
-      <li><a href="/docs/getting-started/">Blog</a></li>
-      <li><a href="https://get.mocklab.io/pricing">Pricing</a></li>
+      <li><a href="https://wiremock.io/pricing">Pricing</a></li>
     </ul>
   </div>
 
@@ -484,24 +480,7 @@ apache-jmeter-4.0/bin/jmeter
       <li><a href="/oauth2/">OAuth2</a></li>
     </ul>
   </div>
-
-  <div class="page__footer-links-block">
-    <h3>Policies</h3>
-    <ul>
-      <li><a href="/docs/terms-and-conditions/">Terms and conditions</a></li>
-      <li><a href="/docs/privacy-policy/">Privacy policy</a></li>
-    </ul>
-  </div>
-
-  <div class="page__footer-links-block">
-    <ul>
-
-    </ul>
-  </div>
 </nav>
-
-
-
       </footer>
     </div>
 
