@@ -1,5 +1,5 @@
 {
-    "targetBaseUrl" : "http://example.mocklab.io",
+    "targetBaseUrl" : "http://example.wiremockapi.cloud",
     "filters" : {
         "urlPathPattern" : "/api/.*",
         "method" : "GET"
