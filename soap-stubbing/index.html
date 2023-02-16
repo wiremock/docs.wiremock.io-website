@@ -1,0 +1,862 @@
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    
+
+<meta charset="utf-8">
+
+
+
+<!-- begin SEO -->
+
+
+
+
+
+
+
+
+
+<title>Working with SOAP | WireMock Cloud</title>
+
+
+
+
+
+
+
+<meta name="description" content="Matching SOAP requests and sending SOAP responses">
+
+<meta property="og:locale" content="en-US">
+<meta property="og:site_name" content="WireMock Cloud">
+<meta property="og:title" content="Working with SOAP">
+
+
+  <link rel="canonical" href="https://docs.wiremock.io/soap-stubbing/">
+  <meta property="og:url" content="https://docs.wiremock.io/soap-stubbing/">
+
+
+
+  <meta property="og:description" content="Matching SOAP requests and sending SOAP responses">
+
+
+
+  <meta property="keywords" content="">
+
+
+
+
+
+  
+
+  
+
+
+
+  <meta property="og:image" content="https://docs.wiremock.io/images/mocklab_logo_with_text_large.png">
+
+
+
+  <meta property="og:type" content="article">
+  <meta property="article:published_time" content="2023-02-16T14:37:43+00:00">
+  
+    <link rel="next" href="https://docs.wiremock.io/stateful-scenarios/" title="Simulating State with Scenarios">
+  
+  
+    <link rel="prev" href="https://docs.wiremock.io/simulating-faults/" title="Simulating Faults">
+  
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Organization",
+      "url": "https://docs.wiremock.io",
+      "logo": "https://docs.wiremock.io/images/https://docs.wiremock.io/images/mocklab_logo_with_text_large.png"
+    }
+  </script>
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context" : "http://schema.org",
+      "@type" : "Person",
+      "name" : "",
+      "url" : "https://docs.wiremock.io",
+      "sameAs" : null
+    }
+  </script>
+
+
+
+
+
+
+<!-- end SEO -->
+
+
+<link href="https://docs.wiremock.io/feed.xml" type="application/atom+xml" rel="alternate" title="WireMock Cloud Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<link href="https://fonts.googleapis.com/css?family=Cairo:300" rel="stylesheet">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="https://docs.wiremock.io/assets/css/main.css">
+
+<meta http-equiv="cleartype" content="on">
+
+<link rel="shortcut icon" type="image/x-icon" href="https://docs.wiremock.io/images/favicon.svg">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.js@1/dist/instantsearch.min.css" />
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.0/dist/instantsearch-theme-algolia.min.css">
+
+    <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "5oa515rnev");
+</script>
+<link href="https://fonts.googleapis.com/css?family=DM+Sans" rel="stylesheet">
+
+  </head>
+
+  <body>
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+    
+
+<nav class="header-nav">
+  <ul class="header-nav__container">
+    <li class="header-nav__logo">
+        <a href="https://wiremock.io">
+            <img src="/images/wiremock_cloud_logo.svg" title="WireMock Cloud logo" alt="WireMock Cloud logo"/>
+        </a>
+    </li>
+
+    <li class="header-nav__item">
+        <a href="/docs/getting-started/" title="Docs">Docs</a>
+    </li>
+    
+    <li class="header-nav__item">
+        <a href="https://www.wiremock.io/pricing" title="Docs">Pricing</a>
+    </li>
+    
+    <li class="header-nav__cta">
+        <a href="https://app.wiremock.cloud/login" title="Sign up" target="_blank">Start mocking for free</a>
+    </li>
+
+    <li class="header-nav__cta header-nav__cta--secondary">
+        <a href="https://app.wiremock.cloud/login" title="Login" target="_blank">Login</a>
+    </li>
+  </ul>
+</nav>
+
+    
+
+<div id="main" role="main">
+  
+
+<div class="sidebar">
+  <nav class="nav__list">
+    <ul class="doc-categories">
+      
+        <li class="doc-category">
+          <span class="doc-category__title">Setup & Configuration</span>
+          <ul class="doc-category__links">
+            
+              
+              
+              <li>
+                <a href="https://docs.wiremock.io/getting-started/">
+
+                
+                Getting Started
+                </a>
+              </li>
+            
+              
+              
+              <li>
+                <a href="https://docs.wiremock.io/security/">
+
+                
+                Security
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li class="doc-category">
+          <span class="doc-category__title">Stubbing</span>
+          <ul class="doc-category__links">
+            
+              
+              
+              <li>
+                <a href="https://docs.wiremock.io/stubbing/">
+
+                
+                 Basics
+                </a>
+              </li>
+            
+              
+              
+              <li>
+                <a href="https://docs.wiremock.io/advanced-stubbing/">
+
+                
+                Advanced 
+                </a>
+              </li>
+            
+              
+              
+              <li>
+                <a href="https://docs.wiremock.io/delays/">
+
+                
+                Response Delays
+                </a>
+              </li>
+            
+              
+              
+              <li>
+                <a href="https://docs.wiremock.io/simulating-faults/">
+
+                
+                Simulating Faults
+                </a>
+              </li>
+            
+              
+              
+              <li>
+                <a href="https://docs.wiremock.io/stateful-scenarios/">
+
+                
+                Simulating State with Scenarios
+                </a>
+              </li>
+            
+              
+              
+              <li>
+                <a href="https://docs.wiremock.io/proxying/">
+
+                
+                Proxying
+                </a>
+              </li>
+            
+              
+              
+              <li>
+                <a href="/soap-stubbing/" class="nav__list-item--selected">
+                
+
+                
+                Working with SOAP
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li class="doc-category">
+          <span class="doc-category__title">Request Matching</span>
+          <ul class="doc-category__links">
+            
+              
+              
+              <li>
+                <a href="https://docs.wiremock.io/request-matching/matcher-types/">
+
+                
+                Overview of Matcher Types
+                </a>
+              </li>
+            
+              
+              
+              <li>
+                <a href="https://docs.wiremock.io/request-matching/url/">
+
+                
+                Matching URLs
+                </a>
+              </li>
+            
+              
+              
+              <li>
+                <a href="https://docs.wiremock.io/request-matching/json/">
+
+                
+                Matching JSON requests
+                </a>
+              </li>
+            
+              
+              
+              <li>
+                <a href="https://docs.wiremock.io/request-matching/xml/">
+
+                
+                Matching XML bodies
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li class="doc-category">
+          <span class="doc-category__title">Response Templating</span>
+          <ul class="doc-category__links">
+            
+              
+              
+              <li>
+                <a href="https://docs.wiremock.io/response-templating/basics/">
+
+                
+                Basics
+                </a>
+              </li>
+            
+              
+              
+              <li>
+                <a href="https://docs.wiremock.io/response-templating/conditional-logic-and-iteration/">
+
+                
+                Conditional Logic and Iteration
+                </a>
+              </li>
+            
+              
+              
+              <li>
+                <a href="https://docs.wiremock.io/response-templating/string-helpers/">
+
+                
+                String Helpers
+                </a>
+              </li>
+            
+              
+              
+              <li>
+                <a href="https://docs.wiremock.io/response-templating/string-encodings/">
+
+                
+                String Encodings
+                </a>
+              </li>
+            
+              
+              
+              <li>
+                <a href="https://docs.wiremock.io/response-templating/number-helpers/">
+
+                
+                Number Helpers
+                </a>
+              </li>
+            
+              
+              
+              <li>
+                <a href="https://docs.wiremock.io/response-templating/dates-and-times/">
+
+                
+                Dates and Times
+                </a>
+              </li>
+            
+              
+              
+              <li>
+                <a href="https://docs.wiremock.io/response-templating/random-values/">
+
+                
+                Random Values
+                </a>
+              </li>
+            
+              
+              
+              <li>
+                <a href="https://docs.wiremock.io/response-templating/xml/">
+
+                
+                Working with XML
+                </a>
+              </li>
+            
+              
+              
+              <li>
+                <a href="https://docs.wiremock.io/response-templating/json/">
+
+                
+                Working with JSON
+                </a>
+              </li>
+            
+              
+              
+              <li>
+                <a href="https://docs.wiremock.io/response-templating/jwt/">
+
+                
+                JSON Web Tokens (JWT)
+                </a>
+              </li>
+            
+              
+              
+              <li>
+                <a href="https://docs.wiremock.io/response-templating/misc-helpers/">
+
+                
+                Miscellaneous Helpers
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li class="doc-category">
+          <span class="doc-category__title">Import & Export</span>
+          <ul class="doc-category__links">
+            
+              
+              
+              <li>
+                <a href="https://docs.wiremock.io/import-and-export/">
+
+                
+                Overview
+                </a>
+              </li>
+            
+              
+              
+              <li>
+                <a href="https://docs.wiremock.io/import-export/wiremock/">
+
+                
+                WireMock
+                </a>
+              </li>
+            
+              
+              
+              <li>
+                <a href="https://docs.wiremock.io/swagger/">
+
+                
+                Swagger and OpenAPI
+                </a>
+              </li>
+            
+              
+              
+              <li>
+                <a href="https://docs.wiremock.io/import-export/postman/">
+
+                
+                Postman
+                </a>
+              </li>
+            
+              
+              
+              <li>
+                <a href="https://docs.wiremock.io/import-export/api/">
+
+                
+                Via the API
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li class="doc-category">
+          <span class="doc-category__title">Record & Playback</span>
+          <ul class="doc-category__links">
+            
+              
+              
+              <li>
+                <a href="https://docs.wiremock.io/recording-stubs/">
+
+                
+                Recording Stubs
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li class="doc-category">
+          <span class="doc-category__title">Tutorials</span>
+          <ul class="doc-category__links">
+            
+              
+              
+              <li>
+                <a href="https://docs.wiremock.io/mock-rest-api/">
+
+                
+                How to build a mock REST API
+                </a>
+              </li>
+            
+              
+              
+              <li>
+                <a href="https://docs.wiremock.io/exploratory-testing-tutorial/">
+
+                
+                Exploratory Testing a Spring Boot App
+                </a>
+              </li>
+            
+              
+              
+              <li>
+                <a href="https://docs.wiremock.io/automated-testing-with-java/">
+
+                
+                Automated Testing with Java
+                </a>
+              </li>
+            
+              
+              
+              <li>
+                <a href="https://docs.wiremock.io/default-responses/">
+
+                
+                Serving a Default Response
+                </a>
+              </li>
+            
+              
+              
+              <li>
+                <a href="https://docs.wiremock.io/oauth2-mock/">
+
+                
+                The OAuth2 / OpenID Connect Mock
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li class="doc-category">
+          <span class="doc-category__title">API References</span>
+          <ul class="doc-category__links">
+            
+              
+              
+              <li>
+                <a href="https://docs.wiremock.io/mocking/">
+
+                
+                API Reference: Mocking
+                </a>
+              </li>
+            
+              
+              
+              <li>
+                <a href="https://docs.wiremock.io/provisioning/">
+
+                
+                API Reference: Provisioning
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+    </ul>
+
+  </nav>
+</div>
+
+
+  <article class="doc-page" itemscope itemtype="http://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Working with SOAP">
+    <meta itemprop="description" content="Stubbing a SOAP response is similar in most respects to stubbing a REST response. The main difference is that the HTTP methodand URL alone are not enough to differentiate requests since these are always the same for a given endpoint.">
+    <meta itemprop="datePublished" content="February 16, 2023">
+    
+
+    <div class="page__inner-wrap">
+      <header>
+        <h1 class="page__title" itemprop="headline">Working with SOAP
+</h1>
+      </header>
+      <section class="page__content" itemprop="text">
+        <p>Stubbing a SOAP response is similar in most respects to stubbing a REST response. The main difference is that the HTTP method
+and URL alone are not enough to differentiate requests since these are always the same for a given endpoint.</p>
+
+<p>In addition, we need to match on the <code class="language-plaintext highlighter-rouge">SOAPAction</code> header and the request body XML.</p>
+
+<h2 id="using-the-soapaction-header">Using the SOAPAction header</h2>
+
+<p>SOAP APIs typically use the <code class="language-plaintext highlighter-rouge">SOAPAction</code> header to select the appropriate action for the call.
+Although you can sometimes avoid this, it’s usually a good idea to add a header match for <code class="language-plaintext highlighter-rouge">SOAPAction</code> as it’s more
+efficient and faster than relying exclusively on the XML body.</p>
+
+<p><img src="/images/screenshots/soap-action-header.png" title="Matching the SOAPAction header" /></p>
+
+<h2 id="matching-the-request-body-with-xml-equality">Matching the request body with XML equality</h2>
+
+<p>When dealing with request bodies that are small and have no data of a transient nature (e.g. transaction IDs or today’s date)
+<code class="language-plaintext highlighter-rouge">equalToXml</code> is a straightforward way to specify a match.</p>
+
+<p>For instance given a SOAP service for managing a to do list, you may wish to mock an interaction matching a specific request to add an item:</p>
+
+<p><img src="/images/screenshots/soap-request.png" title="SOAP request" /></p>
+
+<p>Which returns a success response:
+<img src="/images/screenshots/soap-response.png" title="SOAP response" /></p>
+
+<p>Testing this returns the expected XML response:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ curl -X POST -d '&lt;?xml version="1.0"?&gt;
+&lt;soap-env:Envelope xmlns:soap-env="http://www.w3.org/2001/12/soap-envelope" soap-env:encodingStyle="http://www.w3.org/2001/12/soap-encoding"&gt;
+
+   &lt;soap-env:Body xmlns:m="http://example.company/todo" &gt;
+      &lt;m:AddToDoItem&gt;
+         &lt;m:ToDoItem&gt;Have a wash&lt;/m:ToDoItem&gt;
+      &lt;/m:AddToDoItem&gt;
+   &lt;/soap-env:Body&gt;
+
+&lt;/soap-env:Envelope&gt;' -H 'SOAPAction: "http://example.company/todo/AddToDoItem"' http://example.wiremockapi.cloud/soap-example -v
+
+&gt; POST /soap-example HTTP/1.1
+&gt; Host: example.wiremockapi.cloud
+&gt; User-Agent: curl/7.54.0
+&gt; Accept: */*
+&gt; SOAPAction: "http://example.company/todo/AddToDoItem"
+&gt; Content-Length: 355
+&gt; Content-Type: application/x-www-form-urlencoded
+&gt;
+* upload completely sent off: 355 out of 355 bytes
+&lt; HTTP/1.1 200 OK
+&lt; Transfer-Encoding: chunked
+&lt;
+&lt;?xml version="1.0"?&gt;
+&lt;soap-env:Envelope xmlns:soap-env="http://www.w3.org/2001/12/soap-envelope" soap-env:encodingStyle="http://www.w3.org/2001/12/soap-encoding"&gt;
+
+   &lt;soap-env:Body xmlns:m="http://example.company/todo" &gt;
+      &lt;m:AddToDoResult&gt;Item "Have a wash" successfully added&lt;/m:AddToDoResult&gt;
+   &lt;/soap-env:Body&gt;
+
+&lt;/soap-env:Envelope&gt;
+</code></pre></div></div>
+
+<h3 id="using-placeholders-to-ignore-transient-values">Using placeholders to ignore transient values</h3>
+
+<p>The above example works fine when the request body doesn’t contain any transient data
+such as transaction IDs or the current date. However, if data that changes on each
+request is introduced it will be necessary allow a match to occur regardless of the
+actual value received.</p>
+
+<p>One way to do this is to use <a href="/advanced-stubbing/#xml-placeholders">placeholders</a>.
+Let’s assume the request body of our API now contains a <code class="language-plaintext highlighter-rouge">TransactionId</code> element, which
+must be a unique value for each request e.g.:</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0"?&gt;</span>
+<span class="nt">&lt;soap-env:Envelope</span> <span class="na">xmlns:soap-env=</span><span class="s">"http://www.w3.org/2001/12/soap-envelope"</span>
+  <span class="na">soap-env:encodingStyle=</span><span class="s">"http://www.w3.org/2001/12/soap-encoding"</span><span class="nt">&gt;</span>
+
+   <span class="nt">&lt;soap-env:Body</span> <span class="na">xmlns:m=</span><span class="s">"http://example.company/todo"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;m:TransactionId&gt;</span>1ea094dd-9548-4a79-a43c-b44670f955c6<span class="nt">&lt;/m:TransactionId&gt;</span>
+      <span class="nt">&lt;m:AddToDoItem&gt;</span>
+         <span class="nt">&lt;m:ToDoItem&gt;</span>Have a wash<span class="nt">&lt;/m:ToDoItem&gt;</span>
+      <span class="nt">&lt;/m:AddToDoItem&gt;</span>
+   <span class="nt">&lt;/soap-env:Body&gt;</span>
+
+<span class="nt">&lt;/soap-env:Envelope&gt;</span>
+</code></pre></div></div>
+
+<p>We can ignore this value by ticking the “Enable XMLUnit placeholders” box and
+putting an ignore token into the expected XML in the form:</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;m:TransactionId&gt;</span>${xmlunit.ignore}<span class="nt">&lt;/m:TransactionId&gt;</span>
+</code></pre></div></div>
+
+<p><img src="/images/screenshots/soap-placeholders.png" title="SOAP request XML with placeholders" /></p>
+
+<h2 id="matching-the-request-body-with-xpath">Matching the request body with XPath</h2>
+
+<p>When working with large SOAP requests <code class="language-plaintext highlighter-rouge">equalToXml</code> can become quite slow as it must perform a comparison on every node in the XML document.</p>
+
+<p>It’s often faster to match specific elements within the document using the <code class="language-plaintext highlighter-rouge">matchesXPath</code> operator,
+and since this is a much looser approach to matching it’s another way to solve
+the problem described above where frequently changing values are present.</p>
+
+<p>When matching using XPath, your aim should be to target as few elements/attributes as possible while being able
+to reliably distinguish between requests.</p>
+
+<p>Given the same request body as in the previous section, we could use the following
+XPath to match just on the value of the <code class="language-plaintext highlighter-rouge">m:ToDoItem</code> element:</p>
+
+<div class="language-xpath highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">//</span><span class="nt">AddToDoItem</span><span class="o">/</span><span class="nt">ToDoItem</span><span class="p">[</span><span class="k">text</span><span class="p">()</span><span class="o">=</span><span class="s">'Have a wash'</span><span class="p">]</span><span class="w">
+</span></code></pre></div></div>
+
+<p><img src="/images/screenshots/xpath-soap-match.png" title="Matching with XPath" /></p>
+
+<h3 id="using-multiple-xpath-expressions">Using multiple XPath expressions</h3>
+
+<p>Sometimes you need to match on more than one XML element to be able to adequately
+distinguish between requests. Although XPath supports multiple predicates with logical and/or,
+often it can be easier to use multiple body matchers each targetting a single element.</p>
+
+<p>Suppose we added a <code class="language-plaintext highlighter-rouge">UserId</code> field that we also wanted to target:</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0"?&gt;</span>
+<span class="nt">&lt;soap-env:Envelope</span> <span class="na">xmlns:soap-env=</span><span class="s">"http://www.w3.org/2001/12/soap-envelope"</span>
+  <span class="na">soap-env:encodingStyle=</span><span class="s">"http://www.w3.org/2001/12/soap-encoding"</span><span class="nt">&gt;</span>
+
+   <span class="nt">&lt;soap-env:Body</span> <span class="na">xmlns:m=</span><span class="s">"http://example.company/todo"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;m:TransactionId&gt;</span>1ea094dd-9548-4a79-a43c-b44670f955c6<span class="nt">&lt;/m:TransactionId&gt;</span>
+      <span class="nt">&lt;m:UserId&gt;</span>abc123<span class="nt">&lt;/m:UserId&gt;</span>
+      <span class="nt">&lt;m:AddToDoItem&gt;</span>
+         <span class="nt">&lt;m:ToDoItem&gt;</span>Have a wash<span class="nt">&lt;/m:ToDoItem&gt;</span>
+      <span class="nt">&lt;/m:AddToDoItem&gt;</span>
+   <span class="nt">&lt;/soap-env:Body&gt;</span>
+
+<span class="nt">&lt;/soap-env:Envelope&gt;</span>
+</code></pre></div></div>
+
+<p>We could add one <code class="language-plaintext highlighter-rouge">matchesXPath</code> body pattern for each of the elements we
+care about:</p>
+
+<p><img src="/images/screenshots/multiple-xpath-soap-match.png" title="Matching with multiple XPaths" /></p>
+
+<h3 id="a-gotcha---the-recursive-selector-">A gotcha - the recursive selector: //</h3>
+
+<p>Given the above XML document, you might expect the following XPath expression to
+produce a match:</p>
+
+<div class="language-xpath highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">//</span><span class="nt">UserId</span><span class="p">[</span><span class="k">text</span><span class="p">()</span><span class="o">=</span><span class="s">'abc123'</span><span class="p">]</span><span class="w">
+</span></code></pre></div></div>
+
+<p>However, due to a quirk of how XML documents with namespaces are evaluated this won’t work.
+Ensuring that you select at least one node beneath the element searched for recursively
+will fix this, so the above XPath can be corrected like this:</p>
+
+<div class="language-xpath highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">//</span><span class="nt">UserId</span><span class="o">/</span><span class="k">text</span><span class="p">()[</span><span class="o">.=</span><span class="s">'abc123'</span><span class="p">]</span><span class="w">
+</span></code></pre></div></div>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+
+
+      </footer>
+
+      
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+
+
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        
+
+<div class="page__footer-logo">
+  <img src="https://wiremock.org/images/wireMockLogo.png" style="width: 160px; height: 20px">
+  <p>&copy; 2023 WireMock Cloud</p>
+</div>
+
+<nav class="page__footer-links">
+  <div class="page__footer-links-block">
+    <h3>Help</h3>
+    <ul>
+      <li><a href="/getting-started/">Docs</a></li>
+      <li><a href="https://wiremock.io/pricing">Pricing</a></li>
+    </ul>
+  </div>
+
+  <div class="page__footer-links-block">
+    <h3>Solutions</h3>
+    <ul>
+      <li><a href="/oauth2/">OAuth2</a></li>
+    </ul>
+  </div>
+</nav>
+      </footer>
+    </div>
+
+    <script src="https://docs.wiremock.io/assets/js/main.min.js"></script>
+
+
+
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-78148205-6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-78148205-6');
+  gtag('config', 'AW-10998354290');
+</script>
+
+
+
+
+
+<script>
+    window.intercomSettings = {
+        app_id: "xjme6u4w"
+    };
+</script>
+<script>(function(){var w=window;var ic=w.Intercom;if(typeof ic==="function"){ic('reattach_activator');ic('update',intercomSettings);}else{var d=document;var i=function(){i.c(arguments)};i.q=[];i.c=function(args){i.q.push(args)};w.Intercom=i;function l(){var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://widget.intercom.io/widget/xjme6u4w';var x=d.getElementsByTagName('script')[0];x.parentNode.insertBefore(s,x);}if(w.attachEvent){w.attachEvent('onload',l);}else{w.addEventListener('load',l,false);}}})()</script>
+
+
+  </body>
+</html>
+

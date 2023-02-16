@@ -1,0 +1,794 @@
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    
+
+<meta charset="utf-8">
+
+
+
+<!-- begin SEO -->
+
+
+
+
+
+
+
+
+
+<title>Request Matching - Matching URLs | WireMock Cloud</title>
+
+
+
+
+
+
+
+<meta name="description" content="Matching the request’s URL">
+
+<meta property="og:locale" content="en-US">
+<meta property="og:site_name" content="WireMock Cloud">
+<meta property="og:title" content="Request Matching - Matching URLs">
+
+
+  <link rel="canonical" href="https://docs.wiremock.io/request-matching/url/">
+  <meta property="og:url" content="https://docs.wiremock.io/request-matching/url/">
+
+
+
+  <meta property="og:description" content="Matching the request’s URL">
+
+
+
+  <meta property="keywords" content="">
+
+
+
+
+
+  
+
+  
+
+
+
+  <meta property="og:image" content="https://docs.wiremock.io/images/mocklab_logo_with_text_large.png">
+
+
+
+  <meta property="og:type" content="article">
+  <meta property="article:published_time" content="2023-02-16T14:37:43+00:00">
+  
+    <link rel="next" href="https://docs.wiremock.io/request-matching/xml/" title="Request Matching - Matching XML bodies">
+  
+  
+    <link rel="prev" href="https://docs.wiremock.io/request-matching/matcher-types/" title="Request Matching - Overview of Matcher Types">
+  
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "Organization",
+      "url": "https://docs.wiremock.io",
+      "logo": "https://docs.wiremock.io/images/https://docs.wiremock.io/images/mocklab_logo_with_text_large.png"
+    }
+  </script>
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context" : "http://schema.org",
+      "@type" : "Person",
+      "name" : "",
+      "url" : "https://docs.wiremock.io",
+      "sameAs" : null
+    }
+  </script>
+
+
+
+
+
+
+<!-- end SEO -->
+
+
+<link href="https://docs.wiremock.io/feed.xml" type="application/atom+xml" rel="alternate" title="WireMock Cloud Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<link href="https://fonts.googleapis.com/css?family=Cairo:300" rel="stylesheet">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="https://docs.wiremock.io/assets/css/main.css">
+
+<meta http-equiv="cleartype" content="on">
+
+<link rel="shortcut icon" type="image/x-icon" href="https://docs.wiremock.io/images/favicon.svg">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.js@1/dist/instantsearch.min.css" />
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.3.0/dist/instantsearch-theme-algolia.min.css">
+
+    <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "5oa515rnev");
+</script>
+<link href="https://fonts.googleapis.com/css?family=DM+Sans" rel="stylesheet">
+
+  </head>
+
+  <body>
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+    
+
+<nav class="header-nav">
+  <ul class="header-nav__container">
+    <li class="header-nav__logo">
+        <a href="https://wiremock.io">
+            <img src="/images/wiremock_cloud_logo.svg" title="WireMock Cloud logo" alt="WireMock Cloud logo"/>
+        </a>
+    </li>
+
+    <li class="header-nav__item">
+        <a href="/docs/getting-started/" title="Docs">Docs</a>
+    </li>
+    
+    <li class="header-nav__item">
+        <a href="https://www.wiremock.io/pricing" title="Docs">Pricing</a>
+    </li>
+    
+    <li class="header-nav__cta">
+        <a href="https://app.wiremock.cloud/login" title="Sign up" target="_blank">Start mocking for free</a>
+    </li>
+
+    <li class="header-nav__cta header-nav__cta--secondary">
+        <a href="https://app.wiremock.cloud/login" title="Login" target="_blank">Login</a>
+    </li>
+  </ul>
+</nav>
+
+    
+
+<div id="main" role="main">
+  
+
+<div class="sidebar">
+  <nav class="nav__list">
+    <ul class="doc-categories">
+      
+        <li class="doc-category">
+          <span class="doc-category__title">Setup & Configuration</span>
+          <ul class="doc-category__links">
+            
+              
+              
+              <li>
+                <a href="https://docs.wiremock.io/getting-started/">
+
+                
+                Getting Started
+                </a>
+              </li>
+            
+              
+              
+              <li>
+                <a href="https://docs.wiremock.io/security/">
+
+                
+                Security
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li class="doc-category">
+          <span class="doc-category__title">Stubbing</span>
+          <ul class="doc-category__links">
+            
+              
+              
+              <li>
+                <a href="https://docs.wiremock.io/stubbing/">
+
+                
+                 Basics
+                </a>
+              </li>
+            
+              
+              
+              <li>
+                <a href="https://docs.wiremock.io/advanced-stubbing/">
+
+                
+                Advanced 
+                </a>
+              </li>
+            
+              
+              
+              <li>
+                <a href="https://docs.wiremock.io/delays/">
+
+                
+                Response Delays
+                </a>
+              </li>
+            
+              
+              
+              <li>
+                <a href="https://docs.wiremock.io/simulating-faults/">
+
+                
+                Simulating Faults
+                </a>
+              </li>
+            
+              
+              
+              <li>
+                <a href="https://docs.wiremock.io/stateful-scenarios/">
+
+                
+                Simulating State with Scenarios
+                </a>
+              </li>
+            
+              
+              
+              <li>
+                <a href="https://docs.wiremock.io/proxying/">
+
+                
+                Proxying
+                </a>
+              </li>
+            
+              
+              
+              <li>
+                <a href="https://docs.wiremock.io/soap-stubbing/">
+
+                
+                Working with SOAP
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li class="doc-category">
+          <span class="doc-category__title">Request Matching</span>
+          <ul class="doc-category__links">
+            
+              
+              
+              <li>
+                <a href="https://docs.wiremock.io/request-matching/matcher-types/">
+
+                
+                Overview of Matcher Types
+                </a>
+              </li>
+            
+              
+              
+              <li>
+                <a href="/request-matching/url/" class="nav__list-item--selected">
+                
+
+                
+                Matching URLs
+                </a>
+              </li>
+            
+              
+              
+              <li>
+                <a href="https://docs.wiremock.io/request-matching/json/">
+
+                
+                Matching JSON requests
+                </a>
+              </li>
+            
+              
+              
+              <li>
+                <a href="https://docs.wiremock.io/request-matching/xml/">
+
+                
+                Matching XML bodies
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li class="doc-category">
+          <span class="doc-category__title">Response Templating</span>
+          <ul class="doc-category__links">
+            
+              
+              
+              <li>
+                <a href="https://docs.wiremock.io/response-templating/basics/">
+
+                
+                Basics
+                </a>
+              </li>
+            
+              
+              
+              <li>
+                <a href="https://docs.wiremock.io/response-templating/conditional-logic-and-iteration/">
+
+                
+                Conditional Logic and Iteration
+                </a>
+              </li>
+            
+              
+              
+              <li>
+                <a href="https://docs.wiremock.io/response-templating/string-helpers/">
+
+                
+                String Helpers
+                </a>
+              </li>
+            
+              
+              
+              <li>
+                <a href="https://docs.wiremock.io/response-templating/string-encodings/">
+
+                
+                String Encodings
+                </a>
+              </li>
+            
+              
+              
+              <li>
+                <a href="https://docs.wiremock.io/response-templating/number-helpers/">
+
+                
+                Number Helpers
+                </a>
+              </li>
+            
+              
+              
+              <li>
+                <a href="https://docs.wiremock.io/response-templating/dates-and-times/">
+
+                
+                Dates and Times
+                </a>
+              </li>
+            
+              
+              
+              <li>
+                <a href="https://docs.wiremock.io/response-templating/random-values/">
+
+                
+                Random Values
+                </a>
+              </li>
+            
+              
+              
+              <li>
+                <a href="https://docs.wiremock.io/response-templating/xml/">
+
+                
+                Working with XML
+                </a>
+              </li>
+            
+              
+              
+              <li>
+                <a href="https://docs.wiremock.io/response-templating/json/">
+
+                
+                Working with JSON
+                </a>
+              </li>
+            
+              
+              
+              <li>
+                <a href="https://docs.wiremock.io/response-templating/jwt/">
+
+                
+                JSON Web Tokens (JWT)
+                </a>
+              </li>
+            
+              
+              
+              <li>
+                <a href="https://docs.wiremock.io/response-templating/misc-helpers/">
+
+                
+                Miscellaneous Helpers
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li class="doc-category">
+          <span class="doc-category__title">Import & Export</span>
+          <ul class="doc-category__links">
+            
+              
+              
+              <li>
+                <a href="https://docs.wiremock.io/import-and-export/">
+
+                
+                Overview
+                </a>
+              </li>
+            
+              
+              
+              <li>
+                <a href="https://docs.wiremock.io/import-export/wiremock/">
+
+                
+                WireMock
+                </a>
+              </li>
+            
+              
+              
+              <li>
+                <a href="https://docs.wiremock.io/swagger/">
+
+                
+                Swagger and OpenAPI
+                </a>
+              </li>
+            
+              
+              
+              <li>
+                <a href="https://docs.wiremock.io/import-export/postman/">
+
+                
+                Postman
+                </a>
+              </li>
+            
+              
+              
+              <li>
+                <a href="https://docs.wiremock.io/import-export/api/">
+
+                
+                Via the API
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li class="doc-category">
+          <span class="doc-category__title">Record & Playback</span>
+          <ul class="doc-category__links">
+            
+              
+              
+              <li>
+                <a href="https://docs.wiremock.io/recording-stubs/">
+
+                
+                Recording Stubs
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li class="doc-category">
+          <span class="doc-category__title">Tutorials</span>
+          <ul class="doc-category__links">
+            
+              
+              
+              <li>
+                <a href="https://docs.wiremock.io/mock-rest-api/">
+
+                
+                How to build a mock REST API
+                </a>
+              </li>
+            
+              
+              
+              <li>
+                <a href="https://docs.wiremock.io/exploratory-testing-tutorial/">
+
+                
+                Exploratory Testing a Spring Boot App
+                </a>
+              </li>
+            
+              
+              
+              <li>
+                <a href="https://docs.wiremock.io/automated-testing-with-java/">
+
+                
+                Automated Testing with Java
+                </a>
+              </li>
+            
+              
+              
+              <li>
+                <a href="https://docs.wiremock.io/default-responses/">
+
+                
+                Serving a Default Response
+                </a>
+              </li>
+            
+              
+              
+              <li>
+                <a href="https://docs.wiremock.io/oauth2-mock/">
+
+                
+                The OAuth2 / OpenID Connect Mock
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+        <li class="doc-category">
+          <span class="doc-category__title">API References</span>
+          <ul class="doc-category__links">
+            
+              
+              
+              <li>
+                <a href="https://docs.wiremock.io/mocking/">
+
+                
+                API Reference: Mocking
+                </a>
+              </li>
+            
+              
+              
+              <li>
+                <a href="https://docs.wiremock.io/provisioning/">
+
+                
+                API Reference: Provisioning
+                </a>
+              </li>
+            
+          </ul>
+        </li>
+      
+    </ul>
+
+  </nav>
+</div>
+
+
+  <article class="doc-page" itemscope itemtype="http://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Request Matching - Matching URLs">
+    <meta itemprop="description" content="For most HTTP APIs the URL is the primary means by which the appropriate actionis selected. WireMock Cloud provides a number of different options for matching theURL of an incoming request to a stub.">
+    <meta itemprop="datePublished" content="February 16, 2023">
+    
+
+    <div class="page__inner-wrap">
+      <header>
+        <h1 class="page__title" itemprop="headline">Request Matching - Matching URLs
+</h1>
+      </header>
+      <section class="page__content" itemprop="text">
+        <p>For most HTTP APIs the URL is the primary means by which the appropriate action
+is selected. WireMock Cloud provides a number of different options for matching the
+URL of an incoming request to a stub.</p>
+
+<h2 id="path-vs-path--query">Path vs path + query</h2>
+
+<p>It’s important to be clear exactly which part(s) of the URL you wish to match.</p>
+
+<p>The default strategy WireMock Cloud uses is to match both the path and query parts of the
+URL. For instance, if you were you to enter the following in a stub’s URL field:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/my/path?q=abc&amp;limit=10
+</code></pre></div></div>
+
+<p>then the stub would only be matched if that exact path and query were present e.g.
+for the URL:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://my-api.wiremockapi.cloud/my/path?q=abc&amp;limit=10
+</code></pre></div></div>
+
+<p><img src="/images/screenshots/url-path-and-query.png" title="Path and query matching" /></p>
+
+<p>However, it’s often desirable just to look at the path part of the URL, and either
+ignore the query completely or specify it more flexibly using dedicated query parameter
+matchers (see <a href="/advanced-stubbing/#advanced-request-parameter-matching">Query Parameters</a>).
+Dedicated query matchers can be useful if the parameter order in the URL can change,
+or if you need to match more loosely on the value e.g. using <code class="language-plaintext highlighter-rouge">contains</code> rater than
+exact equality.</p>
+
+<p>To do this, you need to change the URL match type in the Advanced section to <code class="language-plaintext highlighter-rouge">Path</code>
+and ensure you only specify a path in the URL field e.g.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/my/path
+</code></pre></div></div>
+
+<p>This would now match any of the following URLs:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://my-api.wiremockapi.cloud/my/path?q=abc
+https://my-api.wiremockapi.cloud/my/path?q=abc&amp;limit=10
+https://my-api.wiremockapi.cloud/my/path
+https://my-api.wiremockapi.cloud/my/path?randomqueryparam=123
+</code></pre></div></div>
+
+<p><img src="/images/screenshots/url-path-matching.png" title="Path and query matching" /></p>
+
+<h2 id="match-type---exact-vs-regular-expression">Match type - exact vs. regular expression</h2>
+
+<p>In addition to choosing the URL part(s) you wish to match, you can also choose whether
+to check for exact equality or a regular expression match. By default WireMock Cloud uses
+an equality check, but this can be changed in the Advanced section.</p>
+
+<p><img src="/images/screenshots/url-match-type-screenshot.png" title="URL match types" style="height: 150px" /></p>
+
+<p>Choosing the the <code class="language-plaintext highlighter-rouge">Path regex</code> match type can be particularly useful in cases where
+the API you’re mocking uses path parameters and you wish to provide a meaningful response
+to a specific URL pattern regardless of the specific parameter values.</p>
+
+<p>For instance, choosing <code class="language-plaintext highlighter-rouge">Path regex</code> as the match type with the following URL</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/users/[0-9]+
+</code></pre></div></div>
+
+<p>would match any of the following request URLs:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/users/1
+/users/9832749823
+/users/321
+</code></pre></div></div>
+
+<p>A powerful approach is to combine this with <a href="/response-templating/basics/">Response Templating</a>
+so that the ID used in the URL can be inserted into the response body.</p>
+
+<blockquote>
+  <p><strong>note</strong></p>
+
+  <p>Using the Path and query regex is generally not advised. This exists primarily
+for compatibility with projects exported to/from WireMock.</p>
+</blockquote>
+
+<h2 id="matching-any-url">Matching any URL</h2>
+
+<p>In some cases you need a stub to match any request URL. A common use case for this
+is providing a low priority default response which is matched only if nothing else does.
+You might also choose to proxy the request to another endpoint in this case.</p>
+
+<p>For this purpose use the <code class="language-plaintext highlighter-rouge">Any URL</code> option from the URL match type list under Advanced.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+
+
+      </footer>
+
+      
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+
+
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        
+
+<div class="page__footer-logo">
+  <img src="https://wiremock.org/images/wireMockLogo.png" style="width: 160px; height: 20px">
+  <p>&copy; 2023 WireMock Cloud</p>
+</div>
+
+<nav class="page__footer-links">
+  <div class="page__footer-links-block">
+    <h3>Help</h3>
+    <ul>
+      <li><a href="/getting-started/">Docs</a></li>
+      <li><a href="https://wiremock.io/pricing">Pricing</a></li>
+    </ul>
+  </div>
+
+  <div class="page__footer-links-block">
+    <h3>Solutions</h3>
+    <ul>
+      <li><a href="/oauth2/">OAuth2</a></li>
+    </ul>
+  </div>
+</nav>
+      </footer>
+    </div>
+
+    <script src="https://docs.wiremock.io/assets/js/main.min.js"></script>
+
+
+
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-78148205-6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-78148205-6');
+  gtag('config', 'AW-10998354290');
+</script>
+
+
+
+
+
+<script>
+    window.intercomSettings = {
+        app_id: "xjme6u4w"
+    };
+</script>
+<script>(function(){var w=window;var ic=w.Intercom;if(typeof ic==="function"){ic('reattach_activator');ic('update',intercomSettings);}else{var d=document;var i=function(){i.c(arguments)};i.q=[];i.c=function(args){i.q.push(args)};w.Intercom=i;function l(){var s=d.createElement('script');s.type='text/javascript';s.async=true;s.src='https://widget.intercom.io/widget/xjme6u4w';var x=d.getElementsByTagName('script')[0];x.parentNode.insertBefore(s,x);}if(w.attachEvent){w.attachEvent('onload',l);}else{w.addEventListener('load',l,false);}}})()</script>
+
+
+  </body>
+</html>
+

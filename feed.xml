@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.2">Jekyll</generator><link href="https://docs.wiremock.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://docs.wiremock.io/" rel="alternate" type="text/html" /><updated>2023-01-12T16:21:21-08:00</updated><id>https://docs.wiremock.io/feed.xml</id><title type="html">WireMock Cloud</title><subtitle>WireMock Cloud is the hosted API mocking tool built on WireMock</subtitle><author><name>Your Name</name></author><entry><title type="html">Postman Mock Server vs. WireMock Cloud</title><link href="https://docs.wiremock.io/blog/postman-mock-server-vs-mocklab/" rel="alternate" type="text/html" title="Postman Mock Server vs. WireMock Cloud" /><published>2021-03-24T00:00:00-07:00</published><updated>2021-03-24T00:00:00-07:00</updated><id>https://docs.wiremock.io/blog/postman-mock-server-vs-mocklab</id><content type="html" xml:base="https://docs.wiremock.io/blog/postman-mock-server-vs-mocklab/"><![CDATA[<p>Postman is indisputably the dominant HTTP testing tool on the market today, and
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.2">Jekyll</generator><link href="https://docs.wiremock.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://docs.wiremock.io/" rel="alternate" type="text/html" /><updated>2023-02-16T14:37:43+00:00</updated><id>https://docs.wiremock.io/feed.xml</id><title type="html">WireMock Cloud</title><subtitle>WireMock Cloud is the hosted API mocking tool built on WireMock</subtitle><author><name>Your Name</name></author><entry><title type="html">Postman Mock Server vs. WireMock Cloud</title><link href="https://docs.wiremock.io/blog/postman-mock-server-vs-mocklab/" rel="alternate" type="text/html" title="Postman Mock Server vs. WireMock Cloud" /><published>2021-03-24T00:00:00+00:00</published><updated>2021-03-24T00:00:00+00:00</updated><id>https://docs.wiremock.io/blog/postman-mock-server-vs-mocklab</id><content type="html" xml:base="https://docs.wiremock.io/blog/postman-mock-server-vs-mocklab/"><![CDATA[<p>Postman is indisputably the dominant HTTP testing tool on the market today, and
 if you’re involved in developing or testing APIs it’s highly likely you’ve used it
 (or know someone who does at least).</p>
 
@@ -278,16 +278,16 @@ can return the value of <code class="language-plaintext highlighter-rouge">user_
 <p><img src="/images/postman-vs-mocklab/postman-dynamic-variable.png" style="border: none" alt="Postman dynamic variable" /></p>
 
 <p>WireMock Cloud supports full <a href="https://handlebarsjs.com/" target="_blank">Handlebars</a>
-template syntax in its response bodies and headers. This enables <a href="/docs/response-templating/conditional-logic-and-iteration/" target="_blank">conditional logic and looping</a>, variables, and access to a library of functions via Handlebars helpers.</p>
+template syntax in its response bodies and headers. This enables <a href="/response-templating/conditional-logic-and-iteration/" target="_blank">conditional logic and looping</a>, variables, and access to a library of functions via Handlebars helpers.</p>
 
 <p>The model provided to the template
-includes all <a href="/docs/response-templating/basics/#the-data-model" target="_blank">attributes of the incoming request</a>, so it’s possible to include
+includes all <a href="/response-templating/basics/#the-data-model" target="_blank">attributes of the incoming request</a>, so it’s possible to include
 URL path elements, query parameters, header and the request body in your responses.</p>
 
 <p>Additionally, there are a number of Handlebars helpers to extract and transform
-<a href="/docs/response-templating/string-helpers/" target="_blank">text</a>/<a href="/docs/response-templating/json/" target="_blank">JSON</a>/<a href="/docs/response-templating/xml/" target="_blank">XML</a>,
-manipulate <a href="/docs/response-templating/dates-and-times/" target="_blank">dates/times</a>, generate <a href="/docs/response-templating/random-values/" target="_blank">random strings</a>
-(the full Faker set isn’t supported yet) and generate properly constructed, signed <a href="/docs/response-templating/jwt/" target="_blank">JSON Web Tokens (JWTs)</a>.</p>
+<a href="/response-templating/string-helpers/" target="_blank">text</a>/<a href="/response-templating/json/" target="_blank">JSON</a>/<a href="/response-templating/xml/" target="_blank">XML</a>,
+manipulate <a href="/response-templating/dates-and-times/" target="_blank">dates/times</a>, generate <a href="/response-templating/random-values/" target="_blank">random strings</a>
+(the full Faker set isn’t supported yet) and generate properly constructed, signed <a href="/response-templating/jwt/" target="_blank">JSON Web Tokens (JWTs)</a>.</p>
 
 <p><img src="/images/postman-vs-mocklab/mocklab-response-templating.png" style="width: 80%;padding: 15px" alt="WireMock Cloud response templating" /></p>
 
@@ -303,7 +303,7 @@ to your responses.</p>
 
 <p><img src="/images/postman-vs-mocklab/postman-response-delay.png" alt="Postman response delay" /></p>
 
-<p>WireMock Cloud supports <a href="/docs/delays/" target="_blank">fixed, random and chunked delays</a> at the individual stub level.</p>
+<p>WireMock Cloud supports <a href="/delays/" target="_blank">fixed, random and chunked delays</a> at the individual stub level.</p>
 
 <p><img src="/images/postman-vs-mocklab/mocklab-response-delay.png" style="width: 80%" alt="WireMock Cloud response delay" /></p>
 
@@ -319,10 +319,10 @@ and the specific examples served by them.</p>
 
 <p><img src="/images/postman-vs-mocklab/postman-api.png" style="border:none;width:30%" alt="Postman API" /></p>
 
-<p><a href="/docs/provisioning/" target="_blank">WireMock Cloud’s Provisioning API</a>
+<p><a href="/provisioning/" target="_blank">WireMock Cloud’s Provisioning API</a>
 allows mock APIs to be created and deleted.</p>
 
-<p>Once created a mock API has its own <a href="/docs/mocking/" target="_blank">Mocking API</a>
+<p>Once created a mock API has its own <a href="/mocking/" target="_blank">Mocking API</a>
 which supports create/update/delete of stubs, querying of the request log and control
 of other features such as recording.</p>
 
@@ -332,14 +332,14 @@ of other features such as recording.</p>
 
 <p>WireMock Cloud provides a few extra capabilities that are not yet supported by Postman.</p>
 
-<p><a href="/docs/recording-stubs/" target="_blank">Recording</a> - the ability to intercept HTTP traffic between your app (or a client tool)
+<p><a href="/recording-stubs/" target="_blank">Recording</a> - the ability to intercept HTTP traffic between your app (or a client tool)
 and an API, converting it into a set of stubs.</p>
 
-<p><a href="/docs/proxying/" target="_blank">Proxying</a> - conditionally forwarding requests to another API. This is useful
+<p><a href="/proxying/" target="_blank">Proxying</a> - conditionally forwarding requests to another API. This is useful
 when you want to test against a real API, but mock the parts of it that haven’t yet been implemented.
 It’s also a good way to reliably return otherwise hard-to-reproduce errors.</p>
 
-<p><a href="/docs/simulating-faults/" target="_blank">Faults</a> - a WireMock Cloud stub can respond with a number of network faults including dropped
+<p><a href="/simulating-faults/" target="_blank">Faults</a> - a WireMock Cloud stub can respond with a number of network faults including dropped
 connections and garbage HTTP content.</p>
 
 <p><strong>Performance testing</strong> - Mock servers in Postman are rate limited, meaning they’re not
@@ -369,7 +369,7 @@ advanced response templating, recording, proxying, a comprehensive API or suppor
   <a class="mid-article-cta__learn-more" href="https://get.wiremockapi.cloud/?utm_source=docs.wiremock.io&amp;utm_medium=blog&amp;utm_campaign=postman-vs-mocklab-learn-more-cta" title="Learn more">Learn more</a>
 
   <a class="mid-article-cta__get-started" href="https://app.wiremock.cloud/login?for=signup&amp;utm_source=docs.wiremock.io&amp;utm_medium=blog&amp;utm_campaign=postman-vs-mocklab-get-started-cta" title="Get started for free" target="_blank">Get started for free</a>
-</div>]]></content><author><name>Tom Akehurst</name></author><category term="Postman" /><category term="WireMock Cloud" /><category term="API Mocking" /><summary type="html"><![CDATA[A comparison of Postman mock servers and WireMock Cloud for building mock APIs.]]></summary></entry><entry><title type="html">Which Java HTTP client should I use in 2020?</title><link href="https://docs.wiremock.io/blog/which-java-http-client-should-i-use-in-2020/" rel="alternate" type="text/html" title="Which Java HTTP client should I use in 2020?" /><published>2020-10-12T00:00:00-07:00</published><updated>2020-10-12T00:00:00-07:00</updated><id>https://docs.wiremock.io/blog/which-java-http-client-should-i-use-in-2020</id><content type="html" xml:base="https://docs.wiremock.io/blog/which-java-http-client-should-i-use-in-2020/"><![CDATA[<p>HTTP has become the dominant protocol for integration of networked programs, and consequently many (possibly most) Java projects need to be able to make HTTP calls to other systems.</p>
+</div>]]></content><author><name>Tom Akehurst</name></author><category term="Postman" /><category term="WireMock Cloud" /><category term="API Mocking" /><summary type="html"><![CDATA[A comparison of Postman mock servers and WireMock Cloud for building mock APIs.]]></summary></entry><entry><title type="html">Which Java HTTP client should I use in 2020?</title><link href="https://docs.wiremock.io/blog/which-java-http-client-should-i-use-in-2020/" rel="alternate" type="text/html" title="Which Java HTTP client should I use in 2020?" /><published>2020-10-12T00:00:00+01:00</published><updated>2020-10-12T00:00:00+01:00</updated><id>https://docs.wiremock.io/blog/which-java-http-client-should-i-use-in-2020</id><content type="html" xml:base="https://docs.wiremock.io/blog/which-java-http-client-should-i-use-in-2020/"><![CDATA[<p>HTTP has become the dominant protocol for integration of networked programs, and consequently many (possibly most) Java projects need to be able to make HTTP calls to other systems.</p>
 
 <p>As with many things in the Java ecosystem, a broad array of alternatives exist for achieving this, both via core libraries and open source.</p>
 
@@ -786,7 +786,7 @@ Support for the <a href="https://en.wikipedia.org/wiki/WebSocket" target="_blank
 teams quickly simulate their external API dependencies so that they can ship faster and test more
 thoroughly.</p>
 
-<p>For more information, visit <a href="https://get.wiremockapi.cloud?utm_source=docs.wiremock.io&amp;utm_medium=blog&amp;utm_campaign=http_clients_article-bottom_cta">https://get.wiremockapi.cloud</a>.</p>]]></content><author><name>Tom Akehurst</name></author><category term="Java" /><category term="HTTP" /><summary type="html"><![CDATA[A comparison of all the major Java HTTP clients]]></summary></entry><entry><title type="html">WireMock Cloud Now Supports Swagger and Swaggerhub</title><link href="https://docs.wiremock.io/blog/mocklab-now-supports-swagger-and-swaggerhub/" rel="alternate" type="text/html" title="WireMock Cloud Now Supports Swagger and Swaggerhub" /><published>2018-08-03T00:00:00-07:00</published><updated>2018-08-03T00:00:00-07:00</updated><id>https://docs.wiremock.io/blog/mocklab-now-supports-swagger-and-swaggerhub</id><content type="html" xml:base="https://docs.wiremock.io/blog/mocklab-now-supports-swagger-and-swaggerhub/"><![CDATA[<p><img src="/images/screenshots/swagger-logo2.png" alt="Swagger logo" style="border:none" /></p>
+<p>For more information, visit <a href="https://get.wiremockapi.cloud?utm_source=docs.wiremock.io&amp;utm_medium=blog&amp;utm_campaign=http_clients_article-bottom_cta">https://get.wiremockapi.cloud</a>.</p>]]></content><author><name>Tom Akehurst</name></author><category term="Java" /><category term="HTTP" /><summary type="html"><![CDATA[A comparison of all the major Java HTTP clients]]></summary></entry><entry><title type="html">WireMock Cloud Now Supports Swagger and Swaggerhub</title><link href="https://docs.wiremock.io/blog/mocklab-now-supports-swagger-and-swaggerhub/" rel="alternate" type="text/html" title="WireMock Cloud Now Supports Swagger and Swaggerhub" /><published>2018-08-03T00:00:00+01:00</published><updated>2018-08-03T00:00:00+01:00</updated><id>https://docs.wiremock.io/blog/mocklab-now-supports-swagger-and-swaggerhub</id><content type="html" xml:base="https://docs.wiremock.io/blog/mocklab-now-supports-swagger-and-swaggerhub/"><![CDATA[<p><img src="/images/screenshots/swagger-logo2.png" alt="Swagger logo" style="border:none" /></p>
 
 <p><a href="https://swagger.io/" target="_blank">Swagger</a> (or the OpenAPI Specification as it’s now known) has become the de-facto standard
 way to specify, document and test REST-like APIs.</p>
@@ -807,7 +807,7 @@ to generate and re-generate your mock API’s stubs from a Swagger specification
 <p><img src="/images/screenshots/import-stubs-dialog.png" alt="Stub toolbar" style="border-radius: 3px;" /></p>
 
 <p>If you want to regularly push new specification versions via an automated process, you can do so by posting it
-to WireMock Cloud’s API. See <a href="/docs/swagger/#automating-imports-via-the-api">the documentation page</a> for details.</p>
+to WireMock Cloud’s API. See <a href="/swagger/#automating-imports-via-the-api">the documentation page</a> for details.</p>
 
 <p>On submission of a valid spec, WireMock Cloud will generate a collection of new stubs, for each combination of URL template, operation and content type.
 If the spec contains response examples, these will be used, but if not the generator will fall back on the JSON schema, emitting random values that
@@ -844,7 +844,7 @@ a receiver - just create a new webhook in the Integrations menu (<img src="/imag
   <a class="mid-article-cta__learn-more" href="https://get.wiremockapi.cloud/?utm_source=docs.wiremock.io&amp;utm_medium=blog&amp;utm_campaign=swagger-and-swaggerhub-learn-more-cta" title="Learn more" target="_blank">Learn more</a>
 
   <a class="mid-article-cta__get-started" href="https://app.wiremock.cloud/login?for=signup&amp;utm_source=docs.wiremock.io&amp;utm_medium=blog&amp;utm_campaign=swagger-and-swaggerhub-get-started-cta" title="Get started for free" target="_blank">Get started for free</a>
-</div>]]></content><author><name>Tom Akehurst</name></author><category term="WireMock Cloud" /><category term="API Mocking" /><category term="Open API Specification" /><category term="Swagger" /><category term="Swaggerhub" /><summary type="html"><![CDATA[WireMock Cloud now supports import of Swagger documents and integration with Swaggerhub]]></summary></entry><entry><title type="html">Build a Paypal Sandbox for Load Testing in 10 Minutes</title><link href="https://docs.wiremock.io/blog/build-a-paypal-sandbox-for-load-testing/" rel="alternate" type="text/html" title="Build a Paypal Sandbox for Load Testing in 10 Minutes" /><published>2018-07-10T00:00:00-07:00</published><updated>2018-07-10T00:00:00-07:00</updated><id>https://docs.wiremock.io/blog/build-a-paypal-sandbox-for-load-testing</id><content type="html" xml:base="https://docs.wiremock.io/blog/build-a-paypal-sandbox-for-load-testing/"><![CDATA[<div class="video">
+</div>]]></content><author><name>Tom Akehurst</name></author><category term="WireMock Cloud" /><category term="API Mocking" /><category term="Open API Specification" /><category term="Swagger" /><category term="Swaggerhub" /><summary type="html"><![CDATA[WireMock Cloud now supports import of Swagger documents and integration with Swaggerhub]]></summary></entry><entry><title type="html">Build a Paypal Sandbox for Load Testing in 10 Minutes</title><link href="https://docs.wiremock.io/blog/build-a-paypal-sandbox-for-load-testing/" rel="alternate" type="text/html" title="Build a Paypal Sandbox for Load Testing in 10 Minutes" /><published>2018-07-10T00:00:00+01:00</published><updated>2018-07-10T00:00:00+01:00</updated><id>https://docs.wiremock.io/blog/build-a-paypal-sandbox-for-load-testing</id><content type="html" xml:base="https://docs.wiremock.io/blog/build-a-paypal-sandbox-for-load-testing/"><![CDATA[<div class="video">
 <script src="https://fast.wistia.com/embed/medias/tz7u9ot0sj.jsonp" async=""></script><script src="https://fast.wistia.com/assets/external/E-v1.js" async=""></script><div class="wistia_responsive_padding" style="padding:56.25% 0 0 0;position:relative;"><div class="wistia_responsive_wrapper" style="height:100%;left:0;position:absolute;top:0;width:100%;"><div class="wistia_embed wistia_async_tz7u9ot0sj videoFoam=true" style="height:100%;position:relative;width:100%"><div class="wistia_swatch" style="height:100%;left:0;opacity:0;overflow:hidden;position:absolute;top:0;transition:opacity 200ms;width:100%;"><img src="https://fast.wistia.com/embed/medias/tz7u9ot0sj/swatch" style="filter:blur(5px);height:100%;object-fit:contain;width:100%;" alt="" onload="this.parentNode.style.opacity=1;" /></div></div></div></div>
 </div>
 
@@ -934,7 +934,7 @@ to any create payment request, so delete this.</p>
 
 <p><img src="/images/screenshots/paypal-article/request-body.png" alt="Request body" style="width: 90%; border: none" /></p>
 
-<p>We want to ensure we’re sending a unique payment ID in the response each time. To do this, we need to enable <a href="/docs/response-templating/">response templating</a>:</p>
+<p>We want to ensure we’re sending a unique payment ID in the response each time. To do this, we need to enable <a href="/response-templating/">response templating</a>:</p>
 
 <p><img src="/images/screenshots/enable-response-templating-screenshot.png" alt="Enable response templating" style="width: 30%" /></p>
 

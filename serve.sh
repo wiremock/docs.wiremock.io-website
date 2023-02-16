@@ -3,4 +3,4 @@
 set -euo pipefail
 
 npm run watch:all &
-bundle exec jekyll serve
+rbenv exec bundle exec jekyll serve

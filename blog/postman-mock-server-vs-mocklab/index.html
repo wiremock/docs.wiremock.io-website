@@ -61,7 +61,7 @@
 
 
   <meta property="og:type" content="article">
-  <meta property="article:published_time" content="2021-03-24T00:00:00-07:00">
+  <meta property="article:published_time" content="2021-03-24T00:00:00+00:00">
   
   
     <link rel="prev" href="https://docs.wiremock.io/blog/which-java-http-client-should-i-use-in-2020/" title="Which Java HTTP client should I use in 2020?">
@@ -196,7 +196,7 @@
               <img class="author-pic" src="/images/authors/tom_akehurst.png"/> Tom Akehurst
 
               
-                on <time datetime="2021-03-24T00:00:00-07:00">March 24, 2021</time>
+                on <time datetime="2021-03-24T00:00:00+00:00">March 24, 2021</time>
               
           </p>
 
@@ -526,16 +526,16 @@ can return the value of <code class="language-plaintext highlighter-rouge">user_
 <p><img src="/images/postman-vs-mocklab/postman-dynamic-variable.png" style="border: none" alt="Postman dynamic variable" /></p>
 
 <p>WireMock Cloud supports full <a href="https://handlebarsjs.com/" target="_blank">Handlebars</a>
-template syntax in its response bodies and headers. This enables <a href="/docs/response-templating/conditional-logic-and-iteration/" target="_blank">conditional logic and looping</a>, variables, and access to a library of functions via Handlebars helpers.</p>
+template syntax in its response bodies and headers. This enables <a href="/response-templating/conditional-logic-and-iteration/" target="_blank">conditional logic and looping</a>, variables, and access to a library of functions via Handlebars helpers.</p>
 
 <p>The model provided to the template
-includes all <a href="/docs/response-templating/basics/#the-data-model" target="_blank">attributes of the incoming request</a>, so it’s possible to include
+includes all <a href="/response-templating/basics/#the-data-model" target="_blank">attributes of the incoming request</a>, so it’s possible to include
 URL path elements, query parameters, header and the request body in your responses.</p>
 
 <p>Additionally, there are a number of Handlebars helpers to extract and transform
-<a href="/docs/response-templating/string-helpers/" target="_blank">text</a>/<a href="/docs/response-templating/json/" target="_blank">JSON</a>/<a href="/docs/response-templating/xml/" target="_blank">XML</a>,
-manipulate <a href="/docs/response-templating/dates-and-times/" target="_blank">dates/times</a>, generate <a href="/docs/response-templating/random-values/" target="_blank">random strings</a>
-(the full Faker set isn’t supported yet) and generate properly constructed, signed <a href="/docs/response-templating/jwt/" target="_blank">JSON Web Tokens (JWTs)</a>.</p>
+<a href="/response-templating/string-helpers/" target="_blank">text</a>/<a href="/response-templating/json/" target="_blank">JSON</a>/<a href="/response-templating/xml/" target="_blank">XML</a>,
+manipulate <a href="/response-templating/dates-and-times/" target="_blank">dates/times</a>, generate <a href="/response-templating/random-values/" target="_blank">random strings</a>
+(the full Faker set isn’t supported yet) and generate properly constructed, signed <a href="/response-templating/jwt/" target="_blank">JSON Web Tokens (JWTs)</a>.</p>
 
 <p><img src="/images/postman-vs-mocklab/mocklab-response-templating.png" style="width: 80%;padding: 15px" alt="WireMock Cloud response templating" /></p>
 
@@ -551,7 +551,7 @@ to your responses.</p>
 
 <p><img src="/images/postman-vs-mocklab/postman-response-delay.png" alt="Postman response delay" /></p>
 
-<p>WireMock Cloud supports <a href="/docs/delays/" target="_blank">fixed, random and chunked delays</a> at the individual stub level.</p>
+<p>WireMock Cloud supports <a href="/delays/" target="_blank">fixed, random and chunked delays</a> at the individual stub level.</p>
 
 <p><img src="/images/postman-vs-mocklab/mocklab-response-delay.png" style="width: 80%" alt="WireMock Cloud response delay" /></p>
 
@@ -567,10 +567,10 @@ and the specific examples served by them.</p>
 
 <p><img src="/images/postman-vs-mocklab/postman-api.png" style="border:none;width:30%" alt="Postman API" /></p>
 
-<p><a href="/docs/provisioning/" target="_blank">WireMock Cloud’s Provisioning API</a>
+<p><a href="/provisioning/" target="_blank">WireMock Cloud’s Provisioning API</a>
 allows mock APIs to be created and deleted.</p>
 
-<p>Once created a mock API has its own <a href="/docs/mocking/" target="_blank">Mocking API</a>
+<p>Once created a mock API has its own <a href="/mocking/" target="_blank">Mocking API</a>
 which supports create/update/delete of stubs, querying of the request log and control
 of other features such as recording.</p>
 
@@ -580,14 +580,14 @@ of other features such as recording.</p>
 
 <p>WireMock Cloud provides a few extra capabilities that are not yet supported by Postman.</p>
 
-<p><a href="/docs/recording-stubs/" target="_blank">Recording</a> - the ability to intercept HTTP traffic between your app (or a client tool)
+<p><a href="/recording-stubs/" target="_blank">Recording</a> - the ability to intercept HTTP traffic between your app (or a client tool)
 and an API, converting it into a set of stubs.</p>
 
-<p><a href="/docs/proxying/" target="_blank">Proxying</a> - conditionally forwarding requests to another API. This is useful
+<p><a href="/proxying/" target="_blank">Proxying</a> - conditionally forwarding requests to another API. This is useful
 when you want to test against a real API, but mock the parts of it that haven’t yet been implemented.
 It’s also a good way to reliably return otherwise hard-to-reproduce errors.</p>
 
-<p><a href="/docs/simulating-faults/" target="_blank">Faults</a> - a WireMock Cloud stub can respond with a number of network faults including dropped
+<p><a href="/simulating-faults/" target="_blank">Faults</a> - a WireMock Cloud stub can respond with a number of network faults including dropped
 connections and garbage HTTP content.</p>
 
 <p><strong>Performance testing</strong> - Mock servers in Postman are rate limited, meaning they’re not
@@ -653,7 +653,7 @@ advanced response templating, recording, proxying, a comprehensive API or suppor
   <div class="page__footer-links-block">
     <h3>Help</h3>
     <ul>
-      <li><a href="/docs/getting-started/">Docs</a></li>
+      <li><a href="/getting-started/">Docs</a></li>
       <li><a href="https://wiremock.io/pricing">Pricing</a></li>
     </ul>
   </div>
