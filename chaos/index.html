@@ -20,7 +20,7 @@
 
 
 
-<title>Recording Stubs | WireMock Cloud</title>
+<title>Chaos settings - Basics | WireMock Cloud</title>
 
 
 
@@ -28,19 +28,19 @@
 
 
 
-<meta name="description" content="Creating new stubs by recording traffic to another API">
+<meta name="description" content="Proxying requests to other systems">
 
 <meta property="og:locale" content="en-US">
 <meta property="og:site_name" content="WireMock Cloud">
-<meta property="og:title" content="Recording Stubs">
+<meta property="og:title" content="Chaos settings - Basics">
 
 
-  <link rel="canonical" href="https://docs.wiremock.io/recording-stubs/">
-  <meta property="og:url" content="https://docs.wiremock.io/recording-stubs/">
+  <link rel="canonical" href="https://docs.wiremock.io/chaos/">
+  <meta property="og:url" content="https://docs.wiremock.io/chaos/">
 
 
 
-  <meta property="og:description" content="Creating new stubs by recording traffic to another API">
+  <meta property="og:description" content="Proxying requests to other systems">
 
 
 
@@ -63,10 +63,10 @@
   <meta property="og:type" content="article">
   <meta property="article:published_time" content="2023-02-20T11:49:22+00:00">
   
-    <link rel="next" href="https://docs.wiremock.io/request-matching/json/" title="Request Matching - Matching JSON requests">
+    <link rel="next" href="https://docs.wiremock.io/default-responses/" title="Serving a Default Response">
   
   
-    <link rel="prev" href="https://docs.wiremock.io/proxying/" title="Proxying">
+    <link rel="prev" href="https://docs.wiremock.io/automated-testing-with-java/" title="Automated Testing with Java">
   
 
 
@@ -507,8 +507,7 @@
               
               
               <li>
-                <a href="/recording-stubs/" class="nav__list-item--selected">
-                
+                <a href="https://docs.wiremock.io/recording-stubs/">
 
                 
                 Recording Stubs
@@ -525,7 +524,8 @@
               
               
               <li>
-                <a href="https://docs.wiremock.io/chaos/">
+                <a href="/chaos/" class="nav__list-item--selected">
+                
 
                 
                 Basics
@@ -626,45 +626,80 @@
 
 
   <article class="doc-page" itemscope itemtype="http://schema.org/CreativeWork">
-    <meta itemprop="headline" content="Recording Stubs">
-    <meta itemprop="description" content="If the API you’re mocking already exists you can speed up the process of stubbing responses using WireMock Cloud’s record feature.This essentially involves telling WireMock Cloud to act as a proxy to the target API then directing some HTTP requests to WireMock Cloud representing the resources you’d like to stub.">
+    <meta itemprop="headline" content="Chaos settings - Basics">
+    <meta itemprop="description" content="The idea of the chaos settings is to introduce an element of failure into yourenvironment and observe how clients cope with it.">
     <meta itemprop="datePublished" content="February 20, 2023">
     
 
     <div class="page__inner-wrap">
       <header>
-        <h1 class="page__title" itemprop="headline">Recording Stubs
+        <h1 class="page__title" itemprop="headline">Chaos settings - Basics
 </h1>
       </header>
       <section class="page__content" itemprop="text">
-        <p>If the API you’re mocking already exists you can speed up the process of stubbing responses using WireMock Cloud’s record feature.
-This essentially involves telling WireMock Cloud to act as a proxy to the target API then directing some HTTP requests to WireMock Cloud 
-representing the resources you’d like to stub.</p>
+        <p>The idea of the chaos settings is to introduce an element of failure into your
+environment and observe how clients cope with it.</p>
 
-<h2 id="a-simple-recording-example">A simple recording example</h2>
+<p>WireMock Cloud now allows introducing a random element of chaos across all the
+calls to a particular API. This would allow you to check that your client
+behaves appropriately; closes resources correctly, times out correctly, conveys
+sensible error messages to the end user and to your monitoring systems, perhaps
+opens circuit breakers to take load off the upstream system or other resilience
+mechanisms.</p>
 
-<p>Once you have logged into WireMock Cloud and created a mock API, navigate to the Stubs page.</p>
+<h2 id="enabling-chaos">Enabling Chaos</h2>
 
-<p>Then hit the <img src="/images/screenshots/record-button-screenshot.png" title="Record" style="height: 42px; border: none" /> button,
-enter <code class="language-plaintext highlighter-rouge">http://ip-api.com</code> as the target URL and hit <img src="/images/screenshots/start-button-screenshot.png" title="Start" style="height: 46px; border: none" />.</p>
+<p>You enable chaos by toggling the “Enable chaos” switch.</p>
 
-<p><img src="/images/screenshots/record-dialog-screenshot-3.png" title="Record dialog" style="width: 80%" /></p>
+<p><img src="/images/chaos/enable.png" alt="Enable chaos" /></p>
 
-<p>Now make a request to your mock API (substituting <code class="language-plaintext highlighter-rouge">my-mock-api</code> for your own sub domain name):</p>
+<p>Once chaos is enabled, you can set a percentage of requests to that API to
+experience a failure using the slider, or type it directly.</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>curl <span class="nt">-v</span> http://my-mock-api.wiremockapi.cloud/json
-</code></pre></div></div>
+<p><img src="/images/chaos/slider.png" alt="Chaos percentage slider" /></p>
 
-<p>This request will be proxied through WireMock Cloud, so that a <code class="language-plaintext highlighter-rouge">GET</code> request will be made to <code class="language-plaintext highlighter-rouge">http://ip-api.com/json</code> and the result captured.</p>
+<p>The configured percentage of failures will be distributed evenly among the
+failure modes.</p>
 
-<p>Now hit <img src="/images/screenshots/stop-button-screenshot.png" title="Stop" style="height: 46px; border: none" />, and you should see that an extra stub has been added to the list.</p>
+<p>We support five failure modes:</p>
 
-<h2 id="request-matching-rules-when-recording">Request matching rules when recording</h2>
+<h3 id="socket-close"><a href="#socket-close">Socket close</a></h3>
 
-<p>When a request with no body is received during recording, the recorder will create a stub matched on HTTP method and URL only.</p>
+<p>A request will just have the socket closed, with no data returned to the client
+at all. This would allow you to check that your client closes all resources
+appropriately in response.</p>
 
-<p>When a request with a body is received a body pattern is also included. If the request body is a valid JSON document,
-then the <code class="language-plaintext highlighter-rouge">equalToJson</code> operator will be used. If XML, the <code class="language-plaintext highlighter-rouge">equalToXml</code> operator will be used. Otherwise the operator will be <code class="language-plaintext highlighter-rouge">equalTo</code> i.e. simple string equality.</p>
+<h3 id="socket-reset"><a href="#socket-reset">Socket reset</a></h3>
+
+<p>The server will close the connection, setting <code class="language-plaintext highlighter-rouge">SO_LINGER</code> to 0 and thus
+preventing the <code class="language-plaintext highlighter-rouge">TIME_WAIT</code> state being entered. Typically causes a
+“Connection reset by peer” type error to be thrown by the client.</p>
+
+<p>Note: this only seems to work properly on *nix OSs. On Windows it will most
+likely cause the connection to hang rather than reset.</p>
+
+<p>This would allow you to check that your client closes all resources
+appropriately in response.</p>
+
+<h3 id="invalid-http"><a href="#invalid-http">Invalid HTTP</a></h3>
+
+<p>The server will start by responding with a valid HTTP status line, then will
+return random bytes, so an invalid HTTP response. Then it will close the
+connection.</p>
+
+<h3 id="long-delay"><a href="#long-delay">Long delay</a></h3>
+
+<p>The server will delay for the configured amount of time before responding. This
+would allow you to check that you have appropriately configured timeouts.</p>
+
+<p><img src="/images/chaos/long-delay.png" alt="Chaos long delay" /></p>
+
+<h3 id="http-error-status"><a href="#http-error-status">HTTP Error status</a></h3>
+
+<p>The server will return valid HTTP responses with the configured error status
+codes.</p>
+
+<p><img src="/images/chaos/http-errors.png" alt="Chaos http errors" /></p>
 
         
       </section>
